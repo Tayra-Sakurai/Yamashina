@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Yamashina.Views.BalanceSheet"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Yamashina.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:viewmodels="using:Takatsuki.ViewModels"
+    xmlns:models="using:Takatsuki.Models"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
+          Padding="12,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListView ItemsSource="{x:Bind viewModel.BalanceSheets}"
+                  x:Name="SuperListView">
+            <ListView.Header>
+                <controls:DataTable Margin="12,0,0,0">
+                    <controls:DataColumn x:Uid="IdCol"/>
+                    <controls:DataColumn x:Uid="DTCol"
+                                         DesiredWidth="144"/>
+                    <controls:DataColumn x:Uid="ItCol"
+                                         DesiredWidth="3*"/>
+                    <controls:DataColumn x:Uid="MtdCol"
+                                         DesiredWidth="144"/>
+                    <controls:DataColumn x:Uid="BlncCol"
+                                         DesiredWidth="*"/>
+                </controls:DataTable>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:BalanceSheet">
+                    <controls:DataRow>
+                        <TextBlock Text="{x:Bind Id}"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Text="{x:Bind DateTime}"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Text="{x:Bind ItemName}"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Text="{x:Bind Method.Name}"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Text="{x:Bind Balance}"
+                                   VerticalAlignment="Center"/>
+                    </controls:DataRow>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem"
+                       BasedOn="{StaticResource DefaultListViewItemStyle}">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <ComboBox ItemsSource="{x:Bind viewModel.PaymentMethods}"
+                  SelectedItem="{x:Bind viewModel.Filtered, Mode=TwoWay}"
+                  x:Uid="Method" Grid.Row="1"/>
+        <CommandBar DefaultLabelPosition="Right"
+                    Grid.Row="2"
+                    HorizontalContentAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    x:Name="SuperComboBox">
+            <AppBarButton Icon="Add" x:Uid="Add"
+                          Command="{x:Bind viewModel.AddCommand}"/>
+            <AppBarButton Icon="Delete" x:Uid="Del"
+                          Command="{x:Bind viewModel.RemoveCommand}"
+                          CommandParameter="{Binding SelectedItem, ElementName=SuperListView}"/>
+            <AppBarButton x:Uid="Dtl" Icon="Page" x:Name="PagenationButton"/>
+            <AppBarButton x:Uid="Sv" Command="{x:Bind viewModel.SaveCommand}"
+                          Icon="Save"/>
+            <AppBarButton x:Uid="Flt" Command="{x:Bind viewModel.FilterCommand}"
+                          Icon="Filter"/>
+            <AppBarButton x:Uid="Sync" Icon="Sync"
+                          Command="{x:Bind viewModel.LoadCommand}"/>
+        </CommandBar>
+    </Grid>
+</Page>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="Yamashina.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Yamashina"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Yamashina">
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
+
+    <Grid>
+        <NavigationView x:Name="SuperNavigation"
+                        IsSettingsVisible="False">
+            <NavigationView.MenuItems>
+                <NavigationViewItem x:Name="BalanceSheetItem" x:Uid="BS" Icon="Home"/>
+                <NavigationViewItem x:Name="CurrentBalanceItem" x:Uid="CB" Icon="OpenFile"/>
+            </NavigationView.MenuItems>
+            <Frame x:Name="SuperFrame"/>
+        </NavigationView>
+    </Grid>
+</Window>

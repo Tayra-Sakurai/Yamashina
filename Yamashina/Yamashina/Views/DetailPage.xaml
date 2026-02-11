@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Yamashina.Views.DetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Yamashina.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Padding="12,16"
+          Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
+          RowSpacing="8" ColumnSpacing="4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.ColumnSpan="3" x:Uid="DetT"
+                   Style="{StaticResource TitleTextBlockStyle}"/>
+        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                   x:Uid="Desc" Grid.Row="1" Grid.ColumnSpan="3"/>
+        <CalendarDatePicker Date="{x:Bind viewModel.Date, Mode=TwoWay}"
+                            x:Uid="Date"
+                            Grid.Row="2"/>
+        <TimePicker Time="{x:Bind viewModel.Time, Mode=TwoWay}"
+                    x:Uid="Time"
+                    Grid.Row="2" Grid.Column="1"/>
+        <TextBox Text="{x:Bind viewModel.Item, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 x:Uid="Item"
+                 Grid.Row="3" Grid.ColumnSpan="3"/>
+        <ComboBox ItemsSource="{x:Bind viewModel.PaymentMethods}"
+                  SelectedItem="{x:Bind viewModel.Method, Mode=TwoWay}"
+                  x:Uid="Method" Grid.Row="4"/>
+        <NumberBox x:Uid="Balance" Value="{x:Bind viewModel.Balance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                   Grid.Row="5" Grid.ColumnSpan="3"/>
+        <CommandBar DefaultLabelPosition="Right"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    Grid.Row="6" Grid.ColumnSpan="3">
+            <AppBarButton Command="{x:Bind viewModel.SaveCommand}"
+                          x:Uid="Sv" Icon="Save"/>
+        </CommandBar>
+    </Grid>
+</Page>
