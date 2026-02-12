@@ -41,7 +41,7 @@ namespace Yamashina.Views
         {
             if (SuperListView.SelectedItem is Takatsuki.Models.BalanceSheet balanceSheet)
             {
-                Frame.Navigate(typeof(DetailPage), balanceSheet);
+                Frame.Navigate(typeof(DetailPage), balanceSheet, new Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo() { Effect = Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionEffect.FromRight });
             }
             Debug.WriteLine(SuperListView.SelectedItem.ToString());
         }

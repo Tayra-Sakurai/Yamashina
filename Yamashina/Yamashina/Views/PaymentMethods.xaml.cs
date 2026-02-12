@@ -38,7 +38,7 @@ namespace Yamashina.Views
         private void DetailPager_Click(object sender, RoutedEventArgs e)
         {
             if (HyperListView.SelectedItem is PaymentMethodItemViewModel viewModel)
-                Frame.Navigate(typeof(PaymentDetail), viewModel.PaymentMethod);
+                Frame.Navigate(typeof(PaymentDetail), viewModel.PaymentMethod, new Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo { Effect = Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionEffect.FromRight });
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)

@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -54,7 +55,7 @@ namespace Yamashina
         {
             if (pages.Count > 0)
             {
-                SuperFrame.Navigate(pages.Last());
+                SuperFrame.Navigate(pages.Last(), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
                 pages.RemoveAt(pages.Count - 1);
             }
             else
