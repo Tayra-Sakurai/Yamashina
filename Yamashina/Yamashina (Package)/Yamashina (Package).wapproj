@@ -127,6 +127,8 @@
     <Content Include="Images\Wide310x150Logo.scale-150.png" />
     <Content Include="Images\Wide310x150Logo.scale-200.png" />
     <Content Include="Images\Wide310x150Logo.scale-400.png" />
+    <None Include="Yamashina %28Package%29_TemporaryKey.pfx" />
+    <None Include="Yamashina %28Package%29_TemporaryKey_Base64.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Yamashina\Yamashina.csproj">
