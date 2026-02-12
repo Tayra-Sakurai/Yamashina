@@ -43,6 +43,7 @@ namespace Takatsuki.ViewModels
                 _context.SaveChanges();
             }
             BalanceSheets = [];
+            _context.BalanceSheet.Load();
             _context.PaymentMethods.Load();
             PaymentMethods = _context.PaymentMethods.Local.ToObservableCollection();
         }
@@ -52,11 +53,10 @@ namespace Takatsuki.ViewModels
         {
             await _context.SaveChangesAsync();
             BalanceSheets.Clear();
-            await foreach (BalanceSheet balanceSheet in _context.BalanceSheet.AsAsyncEnumerable())
-            {
-                BalanceSheets.Add(balanceSheet);
-            }
-            RemoveCommand.NotifyCanExecuteChanged();
+            List<BalanceSheet> balanceSheets = [.. _context.BalanceSheet.Local ];
+            balanceSheets.Sort();
+            foreach (var sheet in balanceSheets)
+                BalanceSheets.Add(sheet);
         }
 
         [RelayCommand]

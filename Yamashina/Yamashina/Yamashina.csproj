@@ -79,6 +79,6 @@
     <RepositoryUrl>https://github.com/Tayra-Sakurai/Yamashina</RepositoryUrl>
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
   </PropertyGroup>
 </Project>
