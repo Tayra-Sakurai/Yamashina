@@ -17,7 +17,7 @@
         <NavigationView x:Name="SuperNavigation"
                         IsSettingsVisible="False">
             <NavigationView.MenuItems>
-                <NavigationViewItem x:Name="BalanceSheetItem" x:Uid="BS" Icon="Home"/>
+                <NavigationViewItem x:Name="BalanceSheetItem" x:Uid="BS" Icon="Home" IsSelected="True"/>
                 <NavigationViewItem x:Name="CurrentBalanceItem" x:Uid="CB" Icon="OpenFile"/>
             </NavigationView.MenuItems>
             <Frame x:Name="SuperFrame"/>

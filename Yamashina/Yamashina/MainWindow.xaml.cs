@@ -55,8 +55,13 @@ namespace Yamashina
         {
             if (pages.Count > 0)
             {
-                SuperFrame.Navigate(pages.Last(), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
+                Type pageType = pages.Last();
+                SuperFrame.Navigate(pageType, null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
                 pages.RemoveAt(pages.Count - 1);
+                if (pageType == typeof(PaymentMethods))
+                    CurrentBalanceItem.IsSelected = true;
+                else if (pageType == typeof(BalanceSheet))
+                    BalanceSheetItem.IsSelected = true;
             }
             else
                 SuperNavigation.IsBackEnabled = false;
