@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppInstaller
+	Uri="file://thinkpadx13/C$/Users/taira/source/repos/Yamashina/Package/Yamashina (Package).appinstaller"
+	Version="1.1.4.0" xmlns="http://schemas.microsoft.com/appx/appinstaller/2017/2">
+	<MainBundle
+		Name="41741e44-5b36-45b9-9803-cffb2b3be694"
+		Version="1.1.4.0"
+		Publisher="CN=taira"
+		Uri="file://thinkpadx13/C$/Users/taira/source/repos/Yamashina/Package/Yamashina (Package)_1.1.4.0_Test/Yamashina (Package)_1.1.4.0_x86_x64.msixbundle" />
+	<Dependencies>
+		<Package
+			Name="Microsoft.WindowsAppRuntime.1.8"
+			Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+			ProcessorArchitecture="x86"
+			Uri="file://thinkpadx13/C$/Users/taira/source/repos/Yamashina/Package/Yamashina (Package)_1.1.4.0_Test/Dependencies/x86/Microsoft.WindowsAppRuntime.1.8.msix"
+			Version="8000.770.947.0" />
+		<Package
+			Name="Microsoft.WindowsAppRuntime.1.8"
+			Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+			ProcessorArchitecture="x64"
+			Uri="file://thinkpadx13/C$/Users/taira/source/repos/Yamashina/Package/Yamashina (Package)_1.1.4.0_Test/Dependencies/x64/Microsoft.WindowsAppRuntime.1.8.msix"
+			Version="8000.770.947.0" />
+		<Package
+			Name="Microsoft.VCLibs.140.00.UWPDesktop"
+			Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+			ProcessorArchitecture="x64"
+			Uri="file://thinkpadx13/C$/Users/taira/source/repos/Yamashina/Package/Yamashina (Package)_1.1.4.0_Test/Dependencies/x64/Microsoft.VCLibs.x64.14.00.Desktop.appx"
+			Version="14.0.33728.0" />
+		<Package
+			Name="Microsoft.VCLibs.140.00.UWPDesktop"
+			Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+			ProcessorArchitecture="x86"
+			Uri="file://thinkpadx13/C$/Users/taira/source/repos/Yamashina/Package/Yamashina (Package)_1.1.4.0_Test/Dependencies/x86/Microsoft.VCLibs.x86.14.00.Desktop.appx"
+			Version="14.0.33728.0" />
+	</Dependencies>
+	<UpdateSettings>
+		<OnLaunch
+			HoursBetweenUpdateChecks="0" />
+	</UpdateSettings>
+</AppInstaller>

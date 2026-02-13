@@ -49,7 +49,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
-    <AppInstallerUri>\\ThinkPadX13\C%24\Users\taira\OneDrive\Apps\Yamashina</AppInstallerUri>
+    <AppInstallerUri>\\ThinkPadX13\C%24\Users\taira\source\repos\Yamashina\Package</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
