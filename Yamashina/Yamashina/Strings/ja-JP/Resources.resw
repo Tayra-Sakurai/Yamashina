@@ -121,6 +121,10 @@
     <value>追加</value>
     <comment>Adding button.</comment>
   </data>
+  <data name="Backup.Label" xml:space="preserve">
+    <value>バックアップする</value>
+    <comment>Backup button label.</comment>
+  </data>
   <data name="Balance.Header" xml:space="preserve">
     <value>金額</value>
     <comment>Balance.</comment>
@@ -133,6 +137,14 @@
     <value>小遣い帳</value>
     <comment>Home menu.</comment>
   </data>
+  <data name="BU.Content" xml:space="preserve">
+    <value>バックアップ</value>
+    <comment>Backup menu.</comment>
+  </data>
+  <data name="BUTitle.Text" xml:space="preserve">
+    <value>バックアップ</value>
+    <comment>Backup page title.</comment>
+  </data>
   <data name="CB.Content" xml:space="preserve">
     <value>残高確認</value>
     <comment>Current balance window.</comment>
@@ -141,6 +153,10 @@
     <value>日付</value>
     <comment>Date Picker.</comment>
   </data>
+  <data name="DBFile" xml:space="preserve">
+    <value>データベース ファイル</value>
+    <comment>Description of .db file.</comment>
+  </data>
   <data name="Del.Label" xml:space="preserve">
     <value>削除</value>
     <comment>Delete Button.</comment>
@@ -148,6 +164,10 @@
   <data name="Desc.Text" xml:space="preserve">
     <value>このページでは情報を確認および編集できます．</value>
     <comment>Descriptions.</comment>
+  </data>
+  <data name="Desc2.Text" xml:space="preserve">
+    <value>このページからデータベースを指定したフォルダーにバックアップできます．</value>
+    <comment>description of the backup page.</comment>
   </data>
   <data name="DetT.Text" xml:space="preserve">
     <value>詳細画面</value>
@@ -160,6 +180,10 @@
   <data name="Dtl.Label" xml:space="preserve">
     <value>詳細</value>
     <comment>Detail button.</comment>
+  </data>
+  <data name="FilePickBtn.Label" xml:space="preserve">
+    <value>保存先を設定.</value>
+    <comment>File picker button (Save).</comment>
   </data>
   <data name="Flt.Label" xml:space="preserve">
     <value>絞り込む</value>

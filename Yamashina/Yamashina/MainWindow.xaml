@@ -20,6 +20,9 @@
                 <NavigationViewItem x:Name="BalanceSheetItem" x:Uid="BS" Icon="Home" IsSelected="True"/>
                 <NavigationViewItem x:Name="CurrentBalanceItem" x:Uid="CB" Icon="OpenFile"/>
             </NavigationView.MenuItems>
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem x:Name="BackupPageItem" x:Uid="BU" Icon="Upload"/>
+            </NavigationView.FooterMenuItems>
             <Frame x:Name="SuperFrame"/>
         </NavigationView>
     </Grid>

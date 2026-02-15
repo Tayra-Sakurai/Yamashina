@@ -18,8 +18,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListView ItemsSource="{x:Bind viewModel.BalanceSheets}"
-                  x:Name="SuperListView">
+        <ListView x:Name="SuperListView"
+                  ItemsSource="{x:Bind viewModel.BalanceSheets}">
             <ListView.Header>
                 <controls:DataTable Margin="12,0,0,0">
                     <controls:DataColumn x:Uid="IdCol"/>
@@ -36,15 +36,15 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:BalanceSheet">
                     <controls:DataRow>
-                        <TextBlock Text="{x:Bind Id}"
+                        <TextBlock Text="{Binding Id}"
                                    VerticalAlignment="Center"/>
-                        <TextBlock Text="{x:Bind DateTime}"
+                        <TextBlock Text="{Binding DateTime}"
                                    VerticalAlignment="Center"/>
-                        <TextBlock Text="{x:Bind ItemName}"
+                        <TextBlock Text="{Binding ItemName}"
                                    VerticalAlignment="Center"/>
-                        <TextBlock Text="{x:Bind Method.Name}"
+                        <TextBlock Text="{Binding Method.Name}"
                                    VerticalAlignment="Center"/>
-                        <TextBlock Text="{x:Bind Balance}"
+                        <TextBlock Text="{Binding Balance}"
                                    VerticalAlignment="Center"/>
                     </controls:DataRow>
                 </DataTemplate>
@@ -68,7 +68,7 @@
                           Command="{x:Bind viewModel.AddCommand}"/>
             <AppBarButton Icon="Delete" x:Uid="Del"
                           Command="{x:Bind viewModel.RemoveCommand}"
-                          CommandParameter="{Binding SelectedItem, ElementName=SuperListView}"/>
+                          CommandParameter="{Binding ElementName=SuperListView, Path=SelectedItem}"/>
             <AppBarButton x:Uid="Dtl" Icon="Page" x:Name="PagenationButton"/>
             <AppBarButton x:Uid="Sv" Command="{x:Bind viewModel.SaveCommand}"
                           Icon="Save"/>
