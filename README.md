@@ -4,6 +4,12 @@
 
 This application is made to be useful for home use.
 
+## Functions
+
+This application helps you to manage your financial notes at home. You can add payment methods from this application and record the data about their balances.
+
+This application is comapatible in Japanese. English version is now under development.
+
 ## License
 
 Copyright &copy; 2026 Tayra Sakurai
