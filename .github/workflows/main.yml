@@ -2,9 +2,9 @@ name: Build Yamashina
 
 on:
   push:
-    branches: [ "master", "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "master", "main" ]
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -36,8 +36,14 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore Yamashina.slnx
 
+    - name: Decode and prepare certificate
+      run: |
+        $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_SECRET }}")
+        [IO.File]::WriteAllBytes("GitHubActionsWorkflow.pfx", $pfx_cert_byte)
+      shell: powershell
+
     - name: Build
-      run: msbuild Yamashina.slnx /p:Configuration=Release /p:Platform=x64 /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:PublishReadyToRun=false
+      run: msbuild Yamashina.slnx /p:Configuration=Release /p:Platform=x64 /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:PublishReadyToRun=false /p:PackageCertificateKeyFile="GitHubActionsWorkflow.pfx"
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
