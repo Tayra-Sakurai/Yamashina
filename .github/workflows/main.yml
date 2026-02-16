@@ -39,11 +39,22 @@ jobs:
     - name: Decode and prepare certificate
       run: |
         $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_SECRET }}")
-        [IO.File]::WriteAllBytes("GitHubActionsWorkflow.pfx", $pfx_cert_byte)
+        $currentDirectory = Get-Location
+        $certificatePath = Join-Path -Path $currentDirectory -ChildPath "GitHubActionsWorkflow.pfx"
+        [IO.File]::WriteAllBytes($certificatePath, $pfx_cert_byte)
+        Write-Host "Certificate created at: $certificatePath"
+        
+        # Also copy to the packaging project directory
+        $packagingProjectPath = Join-Path -Path $currentDirectory -ChildPath "Yamashina\Yamashina (Package)"
+        if (Test-Path $packagingProjectPath) {
+          $packageCertPath = Join-Path -Path $packagingProjectPath -ChildPath "GitHubActionsWorkflow.pfx"
+          [IO.File]::WriteAllBytes($packageCertPath, $pfx_cert_byte)
+          Write-Host "Certificate also created at: $packageCertPath"
+        }
       shell: powershell
 
     - name: Build
-      run: msbuild Yamashina.slnx /p:Configuration=Release /p:Platform=x64 /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:PublishReadyToRun=false /p:PackageCertificateKeyFile="GitHubActionsWorkflow.pfx"
+      run: msbuild Yamashina.slnx /p:Configuration=Release /p:Platform=x64 /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:PublishReadyToRun=false /p:PackageCertificateKeyFile="GitHubActionsWorkflow.pfx" /p:AppxPackageSigningEnabled=true
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
