@@ -127,14 +127,14 @@
     <value>Amount</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="BlncCol.Content" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="BlncCol.Content" xml:space="preserve">
+    <value>Balance</value>
   </data>
-  <data name="BS.Content" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="BS.Content" xml:space="preserve">
+    <value>Balance Sheet</value>
   </data>
-  <data name="BU.Content" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="BU.Content" xml:space="preserve">
+    <value>Backup</value>
   </data>
   <data name="BUTitle.Text" xml:space="preserve">
     <value>Backup Page</value>
