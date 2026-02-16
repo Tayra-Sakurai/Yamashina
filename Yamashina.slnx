@@ -4,6 +4,10 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Folder Name="/.github/" />
+  <Folder Name="/.github/workflows/">
+    <File Path=".github/workflows/main.yml" />
+  </Folder>
   <Project Path="Takatsuki/Takatsuki.csproj">
     <Platform Solution="Release|x64" Project="x64" />
   </Project>

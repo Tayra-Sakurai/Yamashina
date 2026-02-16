@@ -1,4 +1,4 @@
-name: Build Yamashina
+﻿name: Build Yamashina
 
 on:
   push:
@@ -37,7 +37,7 @@ jobs:
       run: dotnet restore Yamashina.slnx
 
     - name: Build
-      run: msbuild Yamashina.slnx /p:Configuration=Release /p:Platform=x64 /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:PublishReadyToRun=false /p:AppxPackageSigningEnabled=false
+      run: msbuild Yamashina.slnx /p:Configuration=Release /p:Platform=x64 /p:AppxBundle=Always /p:UapAppxPackageBuildMode=SideloadOnly /p:PublishReadyToRun=false /p:AppxPackageSigningEnabled=false /p:GenerateAppInstallerFile=true
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
@@ -47,3 +47,12 @@ jobs:
           **/bin/x64/Release/
           !**/bin/**/ref/
           !**/bin/**/refs/
+
+    - name: Upload MSIX artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Yamashina-MSIX
+        path: |
+          **/*.msix
+          **/*.msixbundle
+
