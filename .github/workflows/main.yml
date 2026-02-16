@@ -1,75 +1,49 @@
-# This workflow will build, sign, and package a WinUI MSIX desktop application
-# built on .NET.
-
-name: WinUI MSIX app
+name: Build Yamashina
 
 on:
   push:
-    branches: [ master ]
+    branches: [ "master", "main" ]
   pull_request:
-    branches: [ master ]
+    branches: [ "master", "main" ]
 
 jobs:
-
   build:
-
-    strategy:
-      matrix:
-        configuration: [Release]
-        platform: [x64]
-
-    runs-on: windows-latest  # For a list of available runner types, refer to
-                             # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
-
-    env:
-      Solution_Name: Yamashina.slnx                         # Replace with your solution name, i.e. App1.sln.
+    runs-on: windows-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v5
-      with:
-        fetch-depth: 0
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-    # Install the .NET workload
-    - name: Install .NET Core
+    - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: '8.0.x'
 
-    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
-    - name: Setup MSBuild.exe
+    - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
 
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
-    - name: Restore the application
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
-      env:
-        Configuration: ${{ matrix.configuration }}
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v2
 
-    # Decode the base 64 encoded pfx and save the Signing_Certificate
-    - name: Decode the pfx
+    - name: Install Windows App SDK
       run: |
-        $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_SECRET }}")
-        $certificatePath = "Yamashina (Package)\Yamashina (Package)_TemporaryKey.pfx"
-        [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
+        dotnet workload install microsoft-net-sdk-windowsdesktop
+        dotnet workload install maui-windows
 
-    # Create the app package by building and packaging the project
-    - name: Create the app package
-      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration /p:Platform=$env:Platform /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:AppxPackageDir="$env:Appx_Package_Dir" /p:GenerateAppxPackageOnBuild=true /p:SelfContained=true
-      env:
-        Appx_Bundle: Never
-        Appx_Package_Build_Mode: SideloadOnly
-        Appx_Package_Dir: Packages\
-        Configuration: ${{ matrix.configuration }}
-        Platform: ${{ matrix.platform }}
+    - name: Restore NuGet packages
+      run: nuget restore Yamashina.slnx
 
-    # Remove the pfx
-    - name: Remove the pfx
-      run: Remove-Item -path "Yamashina (Package)\Yamashina (Package)_TemporaryKey.pfx"
+    - name: Restore dependencies
+      run: dotnet restore Yamashina.slnx
 
-    # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
-    - name: Upload MSIX package
-      uses: actions/upload-artifact@v6
+    - name: Build
+      run: msbuild Yamashina.slnx /p:Configuration=Release /p:Platform=x64 /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
       with:
-        name: MSIX Package
-        path: ${{ github.workspace }}\\Packages
+        name: yamashina-winui3-build
+        path: |
+          **/bin/x64/Release/
+          !**/bin/**/ref/
+          !**/bin/**/refs/
