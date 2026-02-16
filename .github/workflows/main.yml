@@ -28,6 +28,7 @@ jobs:
     - name: Install Windows App SDK
       run: |
         dotnet workload install microsoft-net-sdk-windowsdesktop
+        dotnet workload install maui-windows
 
     - name: Restore NuGet packages
       run: nuget restore Yamashina.slnx
