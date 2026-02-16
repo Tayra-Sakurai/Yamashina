@@ -28,6 +28,9 @@
 
   <Resources>
     <Resource Language="ja-jp"/>
+	<Resource Language="en-gb"/>
+	<Resource Language="en-us"/>
+	<Resource Language="en"/>
   </Resources>
 
   <Applications>
