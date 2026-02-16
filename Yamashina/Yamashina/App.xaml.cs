@@ -56,6 +56,7 @@ namespace Yamashina
             services.AddTransient<EntitiesViewModel>();
             services.AddTransient<PaymentMethodsViewModel>();
             services.AddTransient<PaymentMethodViewModel>();
+            services.AddTransient<StatBalanceSheetsViewModel>();
 
             return services.BuildServiceProvider();
         }

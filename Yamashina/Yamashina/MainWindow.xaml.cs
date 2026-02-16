@@ -51,6 +51,8 @@ namespace Yamashina
                 SuperFrame.Navigate(typeof(PaymentMethods));
             else if (item == resourceLoader.GetString("BU/Content"))
                 SuperFrame.Navigate(typeof(BackupPage));
+            else if (item == resourceLoader.GetString("Monthly/Content"))
+                SuperFrame.Navigate(typeof(MonthlyStat));
         }
 
         private void SuperNavigation_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
@@ -66,6 +68,8 @@ namespace Yamashina
                     BalanceSheetItem.IsSelected = true;
                 else if (pageType == typeof(BackupPage))
                     BackupPageItem.IsSelected = true;
+                else if (pageType == typeof(MonthlyStat))
+                    MonthlyPageItem.IsSelected = true;
             }
             else
                 SuperNavigation.IsBackEnabled = false;

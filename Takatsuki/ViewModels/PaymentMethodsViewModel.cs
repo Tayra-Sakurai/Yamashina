@@ -40,19 +40,13 @@ namespace Takatsuki.ViewModels
         public async Task LoadAsync()
         {
             await context.SaveChangesAsync();
-            await context.BalanceSheet.LoadAsync();
-            await context.PaymentMethods.LoadAsync();
             ViewModels.Clear();
-            List<PaymentMethod> paymentMethods = context.PaymentMethods.Local.ToList();
-            foreach (PaymentMethod item in paymentMethods)
-            {
-                Debug.WriteLine(item.ToString());
-                PaymentMethodItemViewModel itemViewModel = new()
-                {
-                    PaymentMethod = item,
-                };
-                ViewModels.Add(itemViewModel);
-            }
+            await foreach (
+                var method in
+                context.PaymentMethods
+                .Include(e => e.Entries)
+                .AsAsyncEnumerable())
+                ViewModels.Add(new() { PaymentMethod = method });
         }
 
         [RelayCommand]

@@ -15,6 +15,7 @@
     <None Remove="Views\BackupPage.xaml" />
     <None Remove="Views\BalanceSheet.xaml" />
     <None Remove="Views\DetailPage.xaml" />
+    <None Remove="Views\MonthlyStat.xaml" />
     <None Remove="Views\PaymentDetail.xaml" />
     <None Remove="Views\PaymentMethods.xaml" />
   </ItemGroup>
@@ -38,6 +39,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Takatsuki\Takatsuki.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\MonthlyStat.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

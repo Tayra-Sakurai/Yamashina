@@ -205,6 +205,14 @@
     <value>手段</value>
     <comment>Payment method combobox header.</comment>
   </data>
+  <data name="Monthly.Content" xml:space="preserve">
+    <value>月ごとの項目</value>
+    <comment>Monthly page label.</comment>
+  </data>
+  <data name="MonthPicker.Header" xml:space="preserve">
+    <value>月</value>
+    <comment>Month picker.</comment>
+  </data>
   <data name="MtdCol.Content" xml:space="preserve">
     <value>手段</value>
     <comment>Payment method column.</comment>
@@ -212,6 +220,14 @@
   <data name="Rev.Label" xml:space="preserve">
     <value>戻る</value>
     <comment>return button.</comment>
+  </data>
+  <data name="StatDesc.Text" xml:space="preserve">
+    <value>このページからは月ごとの使用状況を確認できます．</value>
+    <comment>Announce.</comment>
+  </data>
+  <data name="StatTtl.Text" xml:space="preserve">
+    <value>月ごとの詳細</value>
+    <comment>Monthly page title.</comment>
   </data>
   <data name="Sv.Label" xml:space="preserve">
     <value>保存</value>

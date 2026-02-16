@@ -18,6 +18,7 @@
                         IsSettingsVisible="False">
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Name="BalanceSheetItem" x:Uid="BS" Icon="Home" IsSelected="True"/>
+                <NavigationViewItem x:Name="MonthlyPageItem" x:Uid="Monthly" Icon="Calendar"/>
                 <NavigationViewItem x:Name="CurrentBalanceItem" x:Uid="CB" Icon="OpenFile"/>
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
