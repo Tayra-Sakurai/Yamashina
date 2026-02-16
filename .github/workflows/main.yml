@@ -2,9 +2,9 @@ name: Build Yamashina
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "main" ]
 
 jobs:
   build:
@@ -37,7 +37,7 @@ jobs:
       run: dotnet restore Yamashina.slnx
 
     - name: Build
-      run: msbuild Yamashina.slnx /p:Configuration=Release /p:Platform=x64 /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly
+      run: msbuild Yamashina.slnx /p:Configuration=Release /p:Platform=x64 /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:PublishReadyToRun=false
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
