@@ -54,7 +54,7 @@ jobs:
       shell: powershell
 
     - name: Build
-      run: msbuild Yamashina.slnx /p:Configuration=Release /p:Platform=x64 /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:PublishReadyToRun=false /p:PackageCertificateKeyFile="GitHubActionsWorkflow.pfx" /p:AppxPackageSigningEnabled=true
+      run: msbuild Yamashina.slnx /p:Configuration=Release /p:Platform=x64 /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:PublishReadyToRun=false /p:PackageCertificateKeyFile="GitHubActionsWorkflow.pfx" /p:AppxPackageSigningEnabled=true /p:PackageCertificateThumbPrint="303C6647182C0447853124F5DAC765EBEA483A57"
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
