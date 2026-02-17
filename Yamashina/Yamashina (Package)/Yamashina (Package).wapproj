@@ -41,16 +41,16 @@
     <TargetPlatformMinVersion>10.0.20348.0</TargetPlatformMinVersion>
     <AssetTargetFallback>net8.0-windows$(TargetPlatformVersion);$(AssetTargetFallback)</AssetTargetFallback>
     <DefaultLanguage>ja-JP</DefaultLanguage>
-    <AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <EntryPointProjectUniqueName>..\Yamashina\Yamashina.csproj</EntryPointProjectUniqueName>
     <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
-    <PackageCertificateThumbprint></PackageCertificateThumbprint>
-    <AppxPackageSigningTimestampDigestAlgorithm></AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <AppInstallerUri>\\ThinkPadX13\C%24\Users\taira\source\repos\Yamashina\Package</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+	<PackageCertificateThumbPrint>FCFA3D5F11CF3871CC98C36FFBB2D68C2E29B259</PackageCertificateThumbPrint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <AppxBundle>Always</AppxBundle>
