@@ -9,6 +9,8 @@
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:viewmodels="using:Takatsuki.ViewModels"
     xmlns:models="using:Takatsuki.Models"
+    xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
@@ -21,17 +23,23 @@
         <ListView x:Name="SuperListView"
                   ItemsSource="{x:Bind viewModel.BalanceSheets}">
             <ListView.Header>
-                <controls:DataTable Margin="12,0,0,0">
-                    <controls:DataColumn x:Uid="IdCol"/>
-                    <controls:DataColumn x:Uid="DTCol"
-                                         DesiredWidth="144"/>
-                    <controls:DataColumn x:Uid="ItCol"
-                                         DesiredWidth="3*"/>
-                    <controls:DataColumn x:Uid="MtdCol"
-                                         DesiredWidth="144"/>
-                    <controls:DataColumn x:Uid="BlncCol"
-                                         DesiredWidth="*"/>
-                </controls:DataTable>
+                <Border Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
+                        Padding="12,4,0,4">
+                    <interactivity:Interaction.Behaviors>
+                        <behaviors:StickyHeaderBehavior/>
+                    </interactivity:Interaction.Behaviors>
+                    <controls:DataTable ColumnSpacing="4">
+                        <controls:DataColumn x:Uid="IdCol"/>
+                        <controls:DataColumn x:Uid="DTCol"
+                                             DesiredWidth="144"/>
+                        <controls:DataColumn x:Uid="ItCol"
+                                             DesiredWidth="3*"/>
+                        <controls:DataColumn x:Uid="MtdCol"
+                                             DesiredWidth="144"/>
+                        <controls:DataColumn x:Uid="BlncCol"
+                                             DesiredWidth="*"/>
+                    </controls:DataTable>
+                </Border>
             </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:BalanceSheet">

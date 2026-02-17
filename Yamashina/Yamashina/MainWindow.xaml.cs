@@ -88,7 +88,8 @@ namespace Yamashina
 
         private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
         {
-            SuperFrame.Navigate(typeof(BalanceSheet));
+            if (SuperFrame.Content == null)
+                SuperFrame.Navigate(typeof(BalanceSheet));
         }
     }
 }

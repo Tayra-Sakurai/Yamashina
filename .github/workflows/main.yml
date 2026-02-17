@@ -73,4 +73,5 @@ jobs:
           **/*.msix
           **/*.msixbundle
           **/*.cer
+          **/*.appinstaller
 
