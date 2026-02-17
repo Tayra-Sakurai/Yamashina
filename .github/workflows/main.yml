@@ -37,7 +37,7 @@ jobs:
       run: dotnet restore Yamashina.slnx
 
     - name: Decode and Generate Certification
-    - run: |
+      run: |
         $pfx_cert_byte = [System.Convert]::FromBase64String("${{ sectrets.BASE64_ENCODED_SECRET }}")
         $current_dictionary = Get-Location
         $certificatePath = Join-Path -Path $currentDirectory -ChildPath "GitHubActionsWorkflow.pfx"
