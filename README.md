@@ -8,7 +8,7 @@ This application is made to be useful for home use.
 
 This application helps you to manage your financial notes at home. You can add payment methods from this application and record the data about their balances.
 
-This application is comapatible in Japanese. English version is now under development.
+This application is comapatible in Japanese and English.
 
 ## License
 
