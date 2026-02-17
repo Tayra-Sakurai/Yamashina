@@ -38,7 +38,7 @@ jobs:
 
     - name: Decode and Generate Certification
       run: |
-        $pfx_cert_byte = [System.Convert]::FromBase64String("${{ sectrets.BASE64_ENCODED_SECRET }}")
+        $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_SECRET }}")
         $current_dictionary = Get-Location
         $certificatePath = Join-Path -Path $currentDirectory -ChildPath "GitHubActionsWorkflow.pfx"
         [IO.File]::WriteAllBytes($certificatePath, $pfx_cert_byte)
