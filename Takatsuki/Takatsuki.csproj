@@ -11,7 +11,7 @@
     <RepositoryUrl>https://github.com/Tayra-Sakurai/Yamashina</RepositoryUrl>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.4.0</Version>
+    <Version>1.5.0</Version>
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
   <ItemGroup>

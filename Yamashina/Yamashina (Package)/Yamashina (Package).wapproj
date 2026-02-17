@@ -50,7 +50,6 @@
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <AppInstallerUri>\\ThinkPadX13\C%24\Users\taira\source\repos\Yamashina\Package</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-	<PackageCertificateThumbPrint>FCFA3D5F11CF3871CC98C36FFBB2D68C2E29B259</PackageCertificateThumbPrint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <AppxBundle>Always</AppxBundle>

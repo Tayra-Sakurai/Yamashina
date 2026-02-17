@@ -19,9 +19,6 @@
     <None Remove="Views\PaymentDetail.xaml" />
     <None Remove="Views\PaymentMethods.xaml" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Icon.ico" />
-  </ItemGroup>
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
@@ -39,6 +36,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Takatsuki\Takatsuki.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Assets\Images\Icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -86,12 +89,12 @@
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <NeutralLanguage>ja-JP</NeutralLanguage>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\Images\Icon.ico</ApplicationIcon>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <SignAssembly>True</SignAssembly>
     <Authors>Tayra Sakurai</Authors>
     <Copyright>Copyright (C) 2026 Tayra Sakurai</Copyright>
     <RepositoryUrl>https://github.com/Tayra-Sakurai/Yamashina</RepositoryUrl>
-    <Version>1.4.0</Version>
+    <Version>1.5.0</Version>
   </PropertyGroup>
 </Project>

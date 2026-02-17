@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -68,6 +69,13 @@ namespace Yamashina
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             _window = new MainWindow();
+            if (AppWindowTitleBar.IsCustomizationSupported())
+            {
+                AppWindow appWindow = _window.AppWindow;
+                string path = AppContext.BaseDirectory;
+                string iconFileName = "Assets/Imeges/Icon.ico";
+                appWindow.SetIcon(System.IO.Path.Combine(path, iconFileName));
+            }
             _window.Activate();
         }
 
