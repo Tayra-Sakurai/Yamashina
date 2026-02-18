@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -32,13 +33,20 @@ namespace Yamashina.Views
             InitializeComponent();
 
             viewModel = App.Current.Service.GetService<PaymentMethodsViewModel>();
-            DetailPager.Click += DetailPager_Click;
+
+            SuperPageCmd.ExecuteRequested += SuperPageCmd_ExecuteRequested;
+            SuperPageCmd.CanExecuteRequested += SuperPageCmd_CanExecuteRequested;
         }
 
-        private void DetailPager_Click(object sender, RoutedEventArgs e)
+        private void SuperPageCmd_CanExecuteRequested(XamlUICommand sender, CanExecuteRequestedEventArgs args)
         {
-            if (HyperListView.SelectedItem is PaymentMethodItemViewModel viewModel)
-                Frame.Navigate(typeof(PaymentDetail), viewModel.PaymentMethod, new Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo { Effect = Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionEffect.FromRight });
+            args.CanExecute = args.Parameter is PaymentMethodItemViewModel;
+        }
+
+        private void SuperPageCmd_ExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)
+        {
+            if (args.Parameter is PaymentMethodItemViewModel model)
+                Frame.Navigate(typeof(PaymentDetail), model.PaymentMethod, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
@@ -47,6 +55,8 @@ namespace Yamashina.Views
 
             if (viewModel != null)
                 await viewModel.LoadAsync();
+
+            SuperPageCmd.NotifyCanExecuteChanged();
         }
     }
 }

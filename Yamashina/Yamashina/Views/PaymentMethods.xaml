@@ -10,6 +10,15 @@
     xmlns:viewmodels="using:Takatsuki.ViewModels"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <XamlUICommand x:Name="SuperPageCmd"
+                       x:Key="SuperPageCmd">
+            <XamlUICommand.IconSource>
+                <SymbolIconSource Symbol="Page"/>
+            </XamlUICommand.IconSource>
+        </XamlUICommand>
+    </Page.Resources>
+
     <Grid Padding="12,16"
           RowSpacing="8"
           Background="{ThemeResource SolidBackgroundFillColorBaseBrush}">
@@ -43,7 +52,8 @@
                           CommandParameter="{Binding SelectedItem, ElementName=HyperListView}"/>
             <AppBarButton Icon="Sync" x:Uid="Sync"
                           Command="{x:Bind viewModel.LoadCommand}"/>
-            <AppBarButton Icon="Page" x:Uid="Dtl" x:Name="DetailPager"/>
+            <AppBarButton x:Uid="Dtl" Command="{StaticResource SuperPageCmd}"
+                          CommandParameter="{Binding SelectedItem, ElementName=HyperListView}"/>
         </CommandBar>
     </Grid>
 </Page>

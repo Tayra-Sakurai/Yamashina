@@ -13,6 +13,15 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <XamlUICommand x:Name="SuperPageCommand"
+                       x:Key="SuperPageCommand">
+            <XamlUICommand.IconSource>
+                <SymbolIconSource Symbol="Page"/>
+            </XamlUICommand.IconSource>
+        </XamlUICommand>
+    </Page.Resources>
+
     <Grid Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
           Padding="12,16">
         <Grid.RowDefinitions>
@@ -77,7 +86,8 @@
             <AppBarButton Icon="Delete" x:Uid="Del"
                           Command="{x:Bind viewModel.RemoveCommand}"
                           CommandParameter="{Binding ElementName=SuperListView, Path=SelectedItem}"/>
-            <AppBarButton x:Uid="Dtl" Icon="Page" x:Name="PagenationButton"/>
+            <AppBarButton x:Uid="Dtl" Command="{StaticResource SuperPageCommand}"
+                          CommandParameter="{Binding SelectedItem, ElementName=SuperListView}"/>
             <AppBarButton x:Uid="Sv" Command="{x:Bind viewModel.SaveCommand}"
                           Icon="Save"/>
             <AppBarButton x:Uid="Flt" Command="{x:Bind viewModel.FilterCommand}"

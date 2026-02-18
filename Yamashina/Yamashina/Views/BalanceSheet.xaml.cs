@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -34,16 +35,19 @@ namespace Yamashina.Views
 
             viewModel = App.Current.Service.GetService<EntitiesViewModel>();
 
-            PagenationButton.Click += PagenationButton_Click;
+            SuperPageCommand.CanExecuteRequested += SuperPageCommand_CanExecuteRequested;
+            SuperPageCommand.ExecuteRequested += SuperPageCommand_ExecuteRequested;
         }
 
-        private void PagenationButton_Click(object sender, RoutedEventArgs e)
+        private void SuperPageCommand_ExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)
         {
-            if (SuperListView.SelectedItem is Takatsuki.Models.BalanceSheet balanceSheet)
-            {
-                Frame.Navigate(typeof(DetailPage), balanceSheet, new Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo() { Effect = Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionEffect.FromRight });
-            }
-            Debug.WriteLine(SuperListView.SelectedItem.ToString());
+            if (args.Parameter is Takatsuki.Models.BalanceSheet balanceSheet)
+                Frame.Navigate(typeof(DetailPage), balanceSheet, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+        }
+
+        private void SuperPageCommand_CanExecuteRequested(XamlUICommand sender, CanExecuteRequestedEventArgs args)
+        {
+            args.CanExecute = args.Parameter is Takatsuki.Models.BalanceSheet;
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
@@ -52,6 +56,8 @@ namespace Yamashina.Views
 
             if (viewModel != null)
                 await viewModel.LoadAsync();
+
+            SuperPageCommand.NotifyCanExecuteChanged();
         }
     }
 }
