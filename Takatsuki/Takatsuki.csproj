@@ -11,7 +11,7 @@
     <RepositoryUrl>https://github.com/Tayra-Sakurai/Yamashina</RepositoryUrl>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.7.0</Version>
+    <Version>2.0.0</Version>
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
   <ItemGroup>
@@ -20,6 +20,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.13" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.7705" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260209005" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Higashiyama\Higashiyama.csproj" />
   </ItemGroup>
   
 </Project>

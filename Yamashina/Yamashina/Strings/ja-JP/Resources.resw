@@ -217,9 +217,17 @@
     <value>手段</value>
     <comment>Payment method column.</comment>
   </data>
+  <data name="Q.Header" xml:space="preserve">
+    <value>検索</value>
+    <comment>Search input header.</comment>
+  </data>
   <data name="Rev.Label" xml:space="preserve">
     <value>戻る</value>
     <comment>return button.</comment>
+  </data>
+  <data name="Srch.Label" xml:space="preserve">
+    <value>検索</value>
+    <comment>Record search button label.</comment>
   </data>
   <data name="StatDesc.Text" xml:space="preserve">
     <value>このページからは月ごとの使用状況を確認できます．</value>

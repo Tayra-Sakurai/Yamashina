@@ -192,8 +192,14 @@
   <data name="MtdCol.Content" xml:space="preserve">
     <value>Method</value>
   </data>
+  <data name="Q.Header" xml:space="preserve">
+    <value>Search for...</value>
+  </data>
   <data name="Rev.Label" xml:space="preserve">
     <value>Return</value>
+  </data>
+  <data name="Srch.Label" xml:space="preserve">
+    <value>Search</value>
   </data>
   <data name="StatDesc.Text" xml:space="preserve">
     <value>This page displays the monthly statical data about your balance.</value>

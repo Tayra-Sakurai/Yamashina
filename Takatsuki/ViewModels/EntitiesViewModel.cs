@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Higashiyama.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -16,6 +17,7 @@ namespace Takatsuki.ViewModels
     public partial class EntitiesViewModel : ObservableObject
     {
         private readonly TakatsukiContext _context;
+        private readonly ISearchService search;
 
         private PaymentMethod paymentMethod;
 
@@ -30,8 +32,9 @@ namespace Takatsuki.ViewModels
             set => SetProperty(ref paymentMethod, value);
         }
 
-        public EntitiesViewModel()
+        public EntitiesViewModel(ISearchService search)
         {
+            this.search = search;
             _context = new();
             if (_context.Database.EnsureCreated())
             {
@@ -99,6 +102,46 @@ namespace Takatsuki.ViewModels
                 if (item.Method == Filtered)
                     BalanceSheets.Add(item);
             }
+        }
+
+        /// <summary>
+        /// Searches the balance sheet queries about the item name.
+        /// </summary>
+        /// <param name="query">Search Query.</param>
+        /// <returns>The task.</returns>
+        [RelayCommand(CanExecute = nameof(CanSearchExecute))]
+        public async Task SearchAsync(string query)
+        {
+            // The item names.
+            IEnumerable<string> strings = from BalanceSheet b in BalanceSheets select b.ItemName;
+
+            // The item names as array.
+            string[] docs = strings.ToArray();
+
+            // The index.
+            int i = 0;
+
+            // The matched query data list.
+            List<BalanceSheet> list = [];
+
+            await foreach (var item in search.SearchAsync(query, docs))
+                if (item >= 0.625)
+                    list.Add(BalanceSheets[i++]);
+
+            BalanceSheets.Clear();
+
+            foreach (var i2 in list)
+                BalanceSheets.Add(i2);
+        }
+
+        /// <summary>
+        /// Judges if the search is executable.
+        /// </summary>
+        /// <param name="query">The search query.</param>
+        /// <returns>Returns <see cref="true"/> if the query is valid; otherwise returns <see cref="false"/>.</returns>
+        public bool CanSearchExecute(string query)
+        {
+            return !string.IsNullOrEmpty(query);
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Google.GenAI;
+using Higashiyama.Services;
+using Microsoft.Extensions.AI;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -52,6 +55,11 @@ namespace Yamashina
         private static IServiceProvider ConfigureServices()
         {
             ServiceCollection services = new();
+
+            services.AddEmbeddingGenerator(new Client().AsIEmbeddingGenerator("gemini-embedding-001"));
+
+            services.AddSingleton<ISearchService>(x =>
+                ActivatorUtilities.CreateInstance<SearchService>(x));
 
             services.AddTransient<BalanceSheetViewModel>();
             services.AddTransient<EntitiesViewModel>();

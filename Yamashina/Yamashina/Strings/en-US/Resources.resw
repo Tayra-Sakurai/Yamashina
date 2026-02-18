@@ -126,7 +126,6 @@
   <data name="Balance.Header" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="BlncCol.Content" xml:space="preserve">
     <value>Balance</value>
   </data>
@@ -193,8 +192,14 @@
   <data name="MtdCol.Content" xml:space="preserve">
     <value>Method</value>
   </data>
+  <data name="Q.Header" xml:space="preserve">
+    <value>Search</value>
+  </data>
   <data name="Rev.Label" xml:space="preserve">
     <value>Return</value>
+  </data>
+  <data name="Srch.Label" xml:space="preserve">
+    <value>Search</value>
   </data>
   <data name="StatDesc.Text" xml:space="preserve">
     <value>This page displays the monthly statistics of your balances.</value>
