@@ -125,7 +125,7 @@ namespace Takatsuki.ViewModels
             List<BalanceSheet> list = [];
 
             await foreach (var item in search.SearchAsync(query, docs))
-                if (item >= 0.625)
+                if (item >= 0.5)
                     list.Add(BalanceSheets[i++]);
 
             BalanceSheets.Clear();
