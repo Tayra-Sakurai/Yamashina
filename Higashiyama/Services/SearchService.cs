@@ -9,10 +9,20 @@ using Windows.ApplicationModel.Resources.Core;
 
 namespace Higashiyama.Services
 {
+    /// <summary>
+    /// The class implementing the <see cref="ISearchService"/>.
+    /// </summary>
     public class SearchService : ISearchService
     {
+        /// <summary>
+        /// The <see cref="IEmbeddingGenerator"/> instance.
+        /// </summary>
         private readonly IEmbeddingGenerator<string, Embedding<float>> embeddingGenerator;
 
+        /// <summary>
+        /// Initializes the service.
+        /// </summary>
+        /// <param name="embeddingGenerator">Service handled <see cref="IEmbeddingGenerator{string, Embedding{float}}"/> instance.</param>
         public SearchService(IEmbeddingGenerator<string, Embedding<float>> embeddingGenerator)
         {
             this.embeddingGenerator = embeddingGenerator;
@@ -20,10 +30,33 @@ namespace Higashiyama.Services
 
         public async IAsyncEnumerable<float> SearchAsync(string query, string[] docs)
         {
-            NDVector<float> queryVector = [.. (await embeddingGenerator.GenerateAsync(query)).Vector.ToArray()];
+            // The query specifier.
+            AdditionalPropertiesDictionary queryOptionsAdditional = new();
+            queryOptionsAdditional["task_type"] = "retrieval_query";
+
+            // The option object.
+            EmbeddingGenerationOptions optionsQuery = new()
+            {
+                AdditionalProperties = queryOptionsAdditional
+            };
+
+            // The oprions for searched words.
+            EmbeddingGenerationOptions optionsDoc = new()
+            {
+                AdditionalProperties = new()
+                {
+                    { "task_type", "retrieval_document" }
+                }
+            };
+
+            // The query vector.
+            NDVector<float> queryVector = [.. (await embeddingGenerator.GenerateAsync(query, optionsQuery)).Vector.ToArray()];
+
+            // The document.
             foreach (string doc in docs)
             {
-                NDVector<float> docVector = [.. (await embeddingGenerator.GenerateAsync(doc)).Vector.ToArray()];
+                // The document vector.
+                NDVector<float> docVector = [.. (await embeddingGenerator.GenerateAsync(doc, optionsDoc)).Vector.ToArray()];
                 yield return docVector * queryVector;
             }
         }
