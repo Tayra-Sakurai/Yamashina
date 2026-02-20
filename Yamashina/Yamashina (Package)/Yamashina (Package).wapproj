@@ -127,10 +127,18 @@
     <Content Include="Assets\Images\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Images\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Images\Wide310x150Logo.scale-400.png" />
-    <Content Include="Assets\Voices\en-GB\detaildesc.wav" />
-    <Content Include="Assets\Voices\en-US\detaildesc.wav" />
-    <Content Include="Assets\Voices\en\detaildesc.wav" />
-    <Content Include="Assets\Voices\ja-JP\detaildesc.wav" />
+    <Content Include="Assets\Voices\en-GB\detaildesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-US\detaildesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en\detaildesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\ja-JP\detaildesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Yamashina %28Package%29_TemporaryKey.pfx" />
     <None Include="Yamashina %28Package%29_TemporaryKey_Base64.txt" />
   </ItemGroup>
