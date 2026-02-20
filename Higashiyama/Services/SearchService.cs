@@ -1,4 +1,7 @@
-﻿using Higashiyama.Specials;
+﻿// SPDX-FileCopyrightText: 2026 Tayra Sakurai
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+using Higashiyama.Specials;
 using Microsoft.Extensions.AI;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,7 @@
-﻿using Google.GenAI;
+﻿// SPDX-FileCopyrightText: 2026 Tayra Sakurai
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+using Google.GenAI;
 using Higashiyama.Services;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
