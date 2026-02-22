@@ -139,6 +139,9 @@
     <Content Include="Assets\Voices\ja-JP\detaildesc.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\SSMLTemplates\Template_Balance.ssml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Yamashina %28Package%29_TemporaryKey.pfx" />
     <None Include="Yamashina %28Package%29_TemporaryKey_Base64.txt" />
   </ItemGroup>

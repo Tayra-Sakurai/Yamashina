@@ -249,4 +249,8 @@
     <value>時刻</value>
     <comment>Time picker.</comment>
   </data>
+  <data name="VoiceCredit.Text" xml:space="preserve">
+    <value>音声は VOICEVOX: 四国めたんによって生成されました．</value>
+    <comment>Credits of the voice.</comment>
+  </data>
 </root>

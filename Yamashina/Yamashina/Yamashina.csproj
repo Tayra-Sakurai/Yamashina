@@ -38,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Sembondori\Sembondori.csproj" />
     <ProjectReference Include="..\..\Takatsuki\Takatsuki.csproj" />
   </ItemGroup>
 
@@ -98,6 +99,6 @@
     <Authors>Tayra Sakurai</Authors>
     <Copyright>Copyright (C) 2026 Tayra Sakurai</Copyright>
     <RepositoryUrl>https://github.com/Tayra-Sakurai/Yamashina</RepositoryUrl>
-    <Version>2.2.0</Version>
+    <Version>2.2.1</Version>
   </PropertyGroup>
 </Project>

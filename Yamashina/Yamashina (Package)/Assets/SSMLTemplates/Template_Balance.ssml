@@ -1,0 +1,11 @@
+﻿<speak version="1.1" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="https://www.w3.org/2001/mstts" xml:lang="ja-jp">
+	{0}
+	<break strength="medium"/>
+	<say-as interpret-as="date" format="ymd">{1}</say-as>
+	<break strength="weak"/>
+	<say-as interpret-as="time" format="hms24">{2}</say-as>
+	<break strength="strong"/>
+	{3}
+	<break strength="medium"/>
+	{4}
+</speak>

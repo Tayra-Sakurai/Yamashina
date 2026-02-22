@@ -29,9 +29,12 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ListView x:Name="SuperListView"
-                  ItemsSource="{x:Bind viewModel.BalanceSheets}">
+                  ItemsSource="{x:Bind viewModel.BalanceSheets}"
+                  IsItemClickEnabled="True">
             <ListView.Header>
                 <Border Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
                         Padding="12,4,0,4">
@@ -78,8 +81,18 @@
                   SelectedItem="{x:Bind viewModel.Filtered, Mode=TwoWay}"
                   x:Uid="Method" Grid.Row="1"/>
         <TextBox x:Name="SuperSearchBox" x:Uid="Q" Grid.ColumnSpan="3" Grid.Row="2"/>
+        <MediaPlayerElement Source="ms-appx:///Assets/Voices/detaildesc.wav"
+                            HorizontalAlignment="Stretch"
+                            Grid.Row="3"
+                            AutoPlay="False"
+                            AreTransportControlsEnabled="True"
+                            x:Name="SuperPlayer">
+            <MediaPlayerElement.TransportControls>
+                <MediaTransportControls IsCompact="True"/>
+            </MediaPlayerElement.TransportControls>
+        </MediaPlayerElement>
         <CommandBar DefaultLabelPosition="Right"
-                    Grid.Row="3"
+                    Grid.Row="4"
                     HorizontalContentAlignment="Stretch"
                     HorizontalAlignment="Stretch"
                     x:Name="SuperComboBox">
@@ -100,5 +113,7 @@
                           Command="{x:Bind viewModel.SearchCommand}"
                           CommandParameter="{Binding Text, ElementName=SuperSearchBox}"/>
         </CommandBar>
+        <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Uid="VoiceCredit"
+                   Grid.Row="5"/>
     </Grid>
 </Page>
