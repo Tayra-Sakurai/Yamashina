@@ -14,7 +14,6 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
-using Sembondori.Tools;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,7 +48,6 @@ namespace Yamashina
         {
             Service = ConfigureServices();
             InitializeComponent();
-            RegisterBackgroundTasks();
         }
 
         /// <summary>
@@ -74,15 +72,6 @@ namespace Yamashina
             services.AddTransient<StatBalanceSheetsViewModel>();
 
             return services.BuildServiceProvider();
-        }
-
-        private void RegisterBackgroundTasks()
-        {
-            Registration.Register(
-                "D0CC0FBE-5D77-41BA-865A-5211AA379190",
-                "NotificationTask",
-                new SystemTrigger(SystemTriggerType.UserPresent, false),
-                null);
         }
 
         /// <summary>

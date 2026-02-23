@@ -9,7 +9,6 @@
     <File Path=".github/workflows/main.yml" />
   </Folder>
   <Project Path="Higashiyama/Higashiyama.csproj" Id="790c6987-bd15-4dfc-8b17-69e8c0aa9448" />
-  <Project Path="Sembondori/Sembondori.csproj" Id="e069f314-20c0-447d-bbc0-e5b0de735fbb" />
   <Project Path="Takatsuki/Takatsuki.csproj">
     <Platform Solution="Release|x64" Project="x64" />
   </Project>
