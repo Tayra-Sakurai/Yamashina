@@ -55,6 +55,13 @@
         <uap:SplashScreen Image="Assets\Images\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
+        <Extension Category="windows.activatableClass.inProcessServer">
+          <InProcessServer>
+            <Path>Sembondori.dll</Path>
+            <ActivatableClass ActivatableClassId="Sembondori.Tasks.NotificationTask" ThreadingModel="both" />
+          </InProcessServer>
+        </Extension>
+
         <Extension Category="windows.backgroundTasks" EntryPoint="Sembondori.Tasks.NotificationTask">
           <BackgroundTasks>
             <Task Type="general"/>
