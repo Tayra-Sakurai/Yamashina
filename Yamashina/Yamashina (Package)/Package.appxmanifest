@@ -13,7 +13,7 @@
   <Identity
     Name="41741e44-5b36-45b9-9803-cffb2b3be694"
     Publisher="CN=taira"
-    Version="2.2.1.0" />
+    Version="2.3.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="41741e44-5b36-45b9-9803-cffb2b3be694" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
@@ -54,6 +54,27 @@
         </uap:DefaultTile >
         <uap:SplashScreen Image="Assets\Images\SplashScreen.png" />
       </uap:VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="Sembondori.Tasks.NotificationTask">
+          <BackgroundTasks>
+            <Task Type="general"/>
+            <Task Type="systemEvent"/>
+            <Task Type="deviceUse"/>
+          </BackgroundTasks>
+        </Extension>
+
+        <desktop:Extension Category="windows.toastNotificationActivation">
+          <desktop:ToastNotificationActivation ToastActivatorCLSID="DC7E8016-E6DC-41AD-BF62-32170B67905D"/>
+        </desktop:Extension>
+
+        <com:Extension Category="windows.comServer">
+          <com:ComServer>
+            <com:ExeServer Executable="Yamashina\Yamashina.exe" DisplayName="Yamashina" Arguments="--AppNotificationActivated:">
+              <com:Class Id="DC7E8016-E6DC-41AD-BF62-32170B67905D"/>
+            </com:ExeServer>
+          </com:ComServer>
+        </com:Extension>
+      </Extensions>
     </Application>
   </Applications>
 
