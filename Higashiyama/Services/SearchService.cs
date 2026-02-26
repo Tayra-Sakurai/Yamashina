@@ -48,7 +48,7 @@ namespace Higashiyama.Services
             {
                 AdditionalProperties = new()
                 {
-                    { "task_type", "retrieval_document" }
+                    { "task_type", "classification" }
                 }
             };
 

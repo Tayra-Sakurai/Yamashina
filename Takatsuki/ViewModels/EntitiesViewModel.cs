@@ -21,6 +21,7 @@ namespace Takatsuki.ViewModels
     {
         private readonly TakatsukiContext _context;
         private readonly ISearchService search;
+        private bool searchTaskEnded = true;
 
         private PaymentMethod paymentMethod;
 
@@ -115,6 +116,8 @@ namespace Takatsuki.ViewModels
         [RelayCommand(CanExecute = nameof(CanSearchExecute))]
         public async Task SearchAsync(string query)
         {
+            searchTaskEnded = false;
+            SearchCommand.NotifyCanExecuteChanged();
             // The item names.
             IEnumerable<string> strings = from BalanceSheet b in BalanceSheets select b.ItemName;
 
@@ -124,17 +127,29 @@ namespace Takatsuki.ViewModels
             // The index.
             int i = 0;
 
-            // The matched query data list.
-            List<BalanceSheet> list = [];
+            // Reorder the items.
 
-            await foreach (var item in search.SearchAsync(query, docs))
-                if (item >= 0.5)
-                    list.Add(BalanceSheets[i++]);
+            // Ordering material
+            List<float> list = [];
+
+            // The matching rate.
+            await foreach (
+                float matchRate
+                in search.SearchAsync(query, docs))
+                list.Add(matchRate);
+
+            // Reordered balance sheet list.
+            IEnumerable<BalanceSheet> balanceSheets =
+                from (BalanceSheet bs, float mr) elm in BalanceSheets.Zip(list)
+                orderby elm.mr descending
+                select elm.bs;
 
             BalanceSheets.Clear();
 
-            foreach (var i2 in list)
-                BalanceSheets.Add(i2);
+            foreach (var element in balanceSheets)
+                BalanceSheets.Add(element);
+            searchTaskEnded = true;
+            SearchCommand.NotifyCanExecuteChanged();
         }
 
         /// <summary>
@@ -144,7 +159,7 @@ namespace Takatsuki.ViewModels
         /// <returns>Returns <see cref="true"/> if the query is valid; otherwise returns <see cref="false"/>.</returns>
         public bool CanSearchExecute(string query)
         {
-            return !string.IsNullOrEmpty(query);
+            return !string.IsNullOrEmpty(query) && searchTaskEnded;
         }
     }
 }
