@@ -33,7 +33,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ListView x:Name="SuperListView"
-                  ItemsSource="{x:Bind viewModel.BalanceSheets}"
+                  ItemsSource="{x:Bind viewModel.BalanceSheets, Mode=OneWay}"
                   IsItemClickEnabled="True">
             <ListView.Header>
                 <Border Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"

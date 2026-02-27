@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.Input;
 using Higashiyama.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.UI.Xaml.Automation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -124,9 +125,6 @@ namespace Takatsuki.ViewModels
             // The item names as array.
             string[] docs = strings.ToArray();
 
-            // The index.
-            int i = 0;
-
             // Reorder the items.
 
             // Ordering material
@@ -138,16 +136,18 @@ namespace Takatsuki.ViewModels
                 in search.SearchAsync(query, docs))
                 list.Add(matchRate);
 
-            // Reordered balance sheet list.
-            IEnumerable<BalanceSheet> balanceSheets =
-                from (BalanceSheet bs, float mr) elm in BalanceSheets.Zip(list)
-                orderby elm.mr descending
-                select elm.bs;
+            List<BalanceSheet> balanceSheets =
+                BalanceSheets.Zip(list)
+                .OrderByDescending(element => element.Second)
+                .ThenBy(element => element.First)
+                .Select(element => element.First)
+                .ToList();
 
             BalanceSheets.Clear();
 
-            foreach (var element in balanceSheets)
-                BalanceSheets.Add(element);
+            foreach (var item in balanceSheets)
+                BalanceSheets.Add(item);
+
             searchTaskEnded = true;
             SearchCommand.NotifyCanExecuteChanged();
         }
