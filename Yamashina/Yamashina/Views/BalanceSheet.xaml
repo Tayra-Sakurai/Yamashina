@@ -11,6 +11,7 @@
     xmlns:models="using:Takatsuki.Models"
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:converters="using:Takatsuki.Converters"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -20,12 +21,16 @@
                 <SymbolIconSource Symbol="Page"/>
             </XamlUICommand.IconSource>
         </XamlUICommand>
+
+        <converters:MethodConverter x:Key="MethodSingleConverter"/>
+        <converters:MethodsConverter x:Key="MethodsConverter"/>
     </Page.Resources>
 
     <Grid Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
           Padding="12,16">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -77,8 +82,8 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <ComboBox ItemsSource="{x:Bind viewModel.PaymentMethods}"
-                  SelectedItem="{x:Bind viewModel.Filtered, Mode=TwoWay}"
+        <ComboBox ItemsSource="{x:Bind viewModel.PaymentMethods, Mode=OneTime, Converter={StaticResource MethodsConverter}}"
+                  SelectedItem="{x:Bind viewModel.Filtered, Mode=TwoWay, Converter={StaticResource MethodSingleConverter}}"
                   x:Uid="Method" Grid.Row="1"/>
         <TextBox x:Name="SuperSearchBox" x:Uid="Q" Grid.ColumnSpan="3" Grid.Row="2"/>
         <MediaPlayerElement Source="ms-appx:///Assets/Voices/detaildesc.wav"
@@ -111,9 +116,13 @@
                           Command="{x:Bind viewModel.LoadCommand}"/>
             <AppBarButton x:Uid="Srch" Icon="Find"
                           Command="{x:Bind viewModel.SearchCommand}"
-                          CommandParameter="{Binding Text, ElementName=SuperSearchBox}"/>
+                          CommandParameter="{Binding Text, ElementName=SuperSearchBox}"
+                          x:Name="SuperSearchButton"/>
         </CommandBar>
         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Uid="VoiceCredit"
                    Grid.Row="5"/>
+        <MediaPlayerElement AreTransportControlsEnabled="False"
+                            x:Name="SuperMediaPlayerElement"
+                            Grid.Row="6"/>
     </Grid>
 </Page>

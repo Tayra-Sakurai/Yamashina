@@ -6,7 +6,13 @@
     xmlns:local="using:Yamashina.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:Takatsuki.Converters"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:MethodsConverter x:Key="MethodsConverter"/>
+        <converters:MethodConverter x:Key="MethodConverter"/>
+    </Page.Resources>
 
     <Grid Padding="12,16"
           Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
@@ -38,8 +44,8 @@
         <TextBox Text="{x:Bind viewModel.Item, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  x:Uid="Item"
                  Grid.Row="3" Grid.ColumnSpan="3"/>
-        <ComboBox ItemsSource="{x:Bind viewModel.PaymentMethods}"
-                  SelectedItem="{x:Bind viewModel.Method, Mode=TwoWay}"
+        <ComboBox ItemsSource="{x:Bind viewModel.PaymentMethods, Mode=OneTime, Converter={StaticResource MethodsConverter}}"
+                  SelectedItem="{x:Bind viewModel.Method, Mode=TwoWay, Converter={StaticResource MethodConverter}}"
                   x:Uid="Method" Grid.Row="4"/>
         <NumberBox x:Uid="Balance" Value="{x:Bind viewModel.Balance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                    Grid.Row="5" Grid.ColumnSpan="3"/>

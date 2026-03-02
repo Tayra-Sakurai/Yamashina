@@ -4,6 +4,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,22 +27,23 @@ namespace Takatsuki.ViewModels
         private DateTimeOffset month;
 
         [ObservableProperty]
-        private ObservableCollection<string> methodNames;
+        private ObservableCollection<PaymentMethod> methods;
 
         [ObservableProperty]
-        private string methodName;
+        private PaymentMethod method;
 
         public StatBalanceSheetsViewModel()
         {
             context = new();
             BalanceSheets = [];
             Month = DateTimeOffset.Now;
-            MethodNames = [];
 
-            foreach (var method in context.PaymentMethods)
-                methodNames.Add(method.Name);
+            Methods = [];
 
-            MethodName = MethodNames.First();
+            foreach (PaymentMethod paymentMethod in context.PaymentMethods)
+                Methods.Add(paymentMethod);
+
+            Method = Methods.First();
         }
 
         [RelayCommand]
@@ -51,16 +53,19 @@ namespace Takatsuki.ViewModels
 
             await context.SaveChangesAsync();
 
-            context = new();
-            await context.BalanceSheet.LoadAsync();
-            await context.PaymentMethods.LoadAsync();
+            PaymentMethod payment =
+                await context.PaymentMethods.FindAsync(Method.Id);
+            List<BalanceSheet> balanceSheets1 =
+                await context.Entry(payment)
+                .Collection(e => e.Entries)
+                .Query()
+                .ToListAsync();
 
-            List<BalanceSheet> sheets = [.. context.BalanceSheet.Local ];
-            sheets.Sort();
+            balanceSheets1.Sort();
 
-            foreach (var sheet in sheets)
-                if (sheet.DateTime.Month == Month.Month && sheet.DateTime.Year == Month.Year && sheet.Method.Name == MethodName)
-                    BalanceSheets.Add(sheet);
+            foreach (BalanceSheet balanceSheet in balanceSheets1)
+                if (balanceSheet.DateTime.Year == Month.Year && balanceSheet.DateTime.Month == Month.Month)
+                    BalanceSheets.Add(balanceSheet);
         }
     }
 }

@@ -56,22 +56,10 @@ namespace Takatsuki.ViewModels
         /// <summary>
         /// Represents the method of the trade.
         /// </summary>
-        public string Method
+        public PaymentMethod Method
         {
-            get { return model.Method.Name; }
-            set
-            {
-                PaymentMethod method = model.Method;
-                PaymentMethod entity = context.PaymentMethods.FirstOrDefault(
-                    e => e.Name == value);
-                if (entity  != null)
-                    method = entity;
-                SetProperty(
-                    model.Method,
-                    method,
-                    model,
-                    (m, v) => m.Method = v);
-            }
+            get => model.Method;
+            set => SetProperty(model.Method, value, model, (m, v) => m.Method = v);
         }
 
         public string Item
@@ -89,14 +77,12 @@ namespace Takatsuki.ViewModels
         /// <summary>
         /// Gets the full list of the available payment methods.
         /// </summary>
-        public ObservableCollection<string> PaymentMethods
+        public ObservableCollection<PaymentMethod> PaymentMethods
         {
             get
             {
-                ObservableCollection<string> strings = [];
-                foreach (var method in context.PaymentMethods)
-                    strings.Add(method.Name);
-                return strings;
+                context.PaymentMethods.Load();
+                return context.PaymentMethods.Local.ToObservableCollection();
             }
         }
 

@@ -61,6 +61,7 @@ namespace Higashiyama.Services
                 // The document vector.
                 NDVector<float> docVector = [.. (await embeddingGenerator.GenerateAsync(doc, optionsDoc)).Vector.ToArray()];
                 yield return docVector * queryVector;
+                await Task.Delay(750);
             }
         }
     }

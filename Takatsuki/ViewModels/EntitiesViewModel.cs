@@ -22,7 +22,6 @@ namespace Takatsuki.ViewModels
     {
         private readonly TakatsukiContext _context;
         private readonly ISearchService search;
-        private bool searchTaskEnded = true;
 
         private PaymentMethod paymentMethod;
 
@@ -54,9 +53,10 @@ namespace Takatsuki.ViewModels
             _context.BalanceSheet.Load();
             _context.PaymentMethods.Load();
             PaymentMethods = _context.PaymentMethods.Local.ToObservableCollection();
+            Filtered = _context.PaymentMethods.First();
         }
 
-        [RelayCommand]
+        [RelayCommand(AllowConcurrentExecutions = false)]
         public async Task LoadAsync()
         {
             await _context.SaveChangesAsync();
@@ -67,7 +67,7 @@ namespace Takatsuki.ViewModels
                 BalanceSheets.Add(sheet);
         }
 
-        [RelayCommand]
+        [RelayCommand(AllowConcurrentExecutions = false)]
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
@@ -98,15 +98,22 @@ namespace Takatsuki.ViewModels
             BalanceSheets.Add(entity);
         }
 
-        [RelayCommand]
-        public void Filter()
+        [RelayCommand(AllowConcurrentExecutions = false)]
+        public async Task Filter()
         {
             BalanceSheets.Clear();
-            foreach(var item in _context.BalanceSheet)
-            {
-                if (item.Method == Filtered)
-                    BalanceSheets.Add(item);
-            }
+
+            PaymentMethod paymentMethod =
+                await _context
+                .PaymentMethods
+                .Include(e => e.Entries)
+                .FirstAsync(e => e.Id == Filtered.Id);
+
+            List<BalanceSheet> balanceSheets = paymentMethod.Entries.ToList();
+            balanceSheets.Sort();
+
+            foreach (var entry in balanceSheets)
+                BalanceSheets.Add(entry);
         }
 
         /// <summary>
@@ -114,11 +121,9 @@ namespace Takatsuki.ViewModels
         /// </summary>
         /// <param name="query">Search Query.</param>
         /// <returns>The task.</returns>
-        [RelayCommand(CanExecute = nameof(CanSearchExecute))]
+        [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanSearchExecute))]
         public async Task SearchAsync(string query)
         {
-            searchTaskEnded = false;
-            SearchCommand.NotifyCanExecuteChanged();
             // The item names.
             IEnumerable<string> strings = from BalanceSheet b in BalanceSheets select b.ItemName;
 
@@ -127,29 +132,29 @@ namespace Takatsuki.ViewModels
 
             // Reorder the items.
 
-            // Ordering material
-            List<float> list = [];
+            // Copy of the entries.
+            BalanceSheet[] copiedEntries = new BalanceSheet[BalanceSheets.Count];
+            // The index
+            int index = 0;
+
+            BalanceSheets.CopyTo(copiedEntries, 0);
+
+            BalanceSheets.Clear();
+
+            // The match rates.
+            List<float> matchRates = [];
 
             // The matching rate.
             await foreach (
                 float matchRate
                 in search.SearchAsync(query, docs))
-                list.Add(matchRate);
+            {
+                matchRates.Add(matchRate);
+                matchRates.Sort();
+                matchRates.Reverse();
 
-            List<BalanceSheet> balanceSheets =
-                BalanceSheets.Zip(list)
-                .OrderByDescending(element => element.Second)
-                .ThenBy(element => element.First)
-                .Select(element => element.First)
-                .ToList();
-
-            BalanceSheets.Clear();
-
-            foreach (var item in balanceSheets)
-                BalanceSheets.Add(item);
-
-            searchTaskEnded = true;
-            SearchCommand.NotifyCanExecuteChanged();
+                BalanceSheets.Insert(matchRates.IndexOf(matchRate), copiedEntries[index++]);
+            }
         }
 
         /// <summary>
@@ -159,7 +164,7 @@ namespace Takatsuki.ViewModels
         /// <returns>Returns <see cref="true"/> if the query is valid; otherwise returns <see cref="false"/>.</returns>
         public bool CanSearchExecute(string query)
         {
-            return !string.IsNullOrEmpty(query) && searchTaskEnded;
+            return !string.IsNullOrEmpty(query);
         }
     }
 }

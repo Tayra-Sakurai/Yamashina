@@ -7,7 +7,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Windows.ApplicationModel.Resources;
@@ -17,14 +16,13 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Speech.Synthesis;
 using System.Text;
 using Takatsuki.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.Media.Core;
-using Windows.Media.Playback;
-using Windows.Media.SpeechSynthesis;
 using Windows.Storage;
+using Windows.Storage.Streams;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -47,55 +45,35 @@ namespace Yamashina.Views
             SuperPageCommand.CanExecuteRequested += SuperPageCommand_CanExecuteRequested;
             SuperPageCommand.ExecuteRequested += SuperPageCommand_ExecuteRequested;
 
-            // SuperListView.ItemClick += SuperListView_ItemClick;
+            SuperListView.ItemClick += SuperListView_ItemClick;
         }
 
         private async void SuperListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            SpeechSynthesizer speechSynthesizer = new();
+            SpeechSynthesizer synth = new SpeechSynthesizer();
+            Takatsuki.Models.BalanceSheet? sheet = e.ClickedItem as Takatsuki.Models.BalanceSheet;
 
-            VoiceInformation voice =
-                (
-                    from VoiceInformation v in SpeechSynthesizer.AllVoices
-                    where v.Language == CultureInfo.CurrentCulture.Name
-                    where v.Gender == VoiceGender.Female
-                    select v
-                ).FirstOrDefault() ?? SpeechSynthesizer.DefaultVoice;
+            if (sheet == null)
+                return;
 
-            speechSynthesizer.Voice = voice;
-
-            Uri uri = new("ms-appx:///Assets/SSMLTemplates/Template_Balance.ssml");
-            StorageFile storageFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
-
+            StorageFile ssmlTemplate = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/SSMLTemplates/Template_Balance.ssml"));
+            string template = await FileIO.ReadTextAsync(ssmlTemplate);
             ResourceLoader resourceLoader = new();
 
-            using (Stream stream = await storageFile.OpenStreamForReadAsync())
-            using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
-            {
-                string ssmlstr = reader.ReadToEnd();
+            string ssmltext =
+                string.Format(
+                    template,
+                    resourceLoader.GetString("DTCol/Content"),
+                    sheet.DateTime.ToString("yyyy-MM-dd"),
+                    sheet.DateTime.ToString("HH:mm:ss"),
+                    resourceLoader.GetString("ItCol/Content"),
+                    sheet.ItemName,
+                    resourceLoader.GetString("MtdCol/Content"),
+                    sheet.Method.Name,
+                    resourceLoader.GetString("BlncCol/Content"),
+                    sheet.Balance.ToString());
 
-                if (SuperListView.SelectedItem is Takatsuki.Models.BalanceSheet item)
-                {
-                    string[] strings =
-                        [
-                            resourceLoader.GetString("DTCol/Content"),
-                                item.DateTime.ToString("yyyy-MM-dd"),
-                                item.DateTime.ToString("HH:mm"),
-                                resourceLoader.GetString("ItCol/Content"),
-                                item.ItemName
-                        ];
-
-                    ssmlstr = string.Format(ssmlstr, strings);
-                    using (SpeechSynthesisStream synthesisStream = await speechSynthesizer.SynthesizeSsmlToStreamAsync(ssmlstr))
-                    {
-                        MediaPlayer mediaPlayer = new()
-                        {
-                            Source = MediaSource.CreateFromStream(synthesisStream, synthesisStream.ContentType)
-                        };
-                        mediaPlayer.Play();
-                    }
-                }
-            }
+            synth.SpeakSsml(ssmltext);
         }
 
         private void SuperPageCommand_ExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)

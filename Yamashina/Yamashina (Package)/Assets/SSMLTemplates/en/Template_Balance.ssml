@@ -1,4 +1,4 @@
-﻿<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="https://www.w3.org/2001/mstts" xml:lang="ja-jp">
+﻿<speak version="1.0" xml:lang="en" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="https://www.w3.org/2001/mstts">
 	{0}
 	<break strength="medium"/>
 	<say-as interpret-as="date" format="ymd">{1}</say-as>
@@ -15,5 +15,5 @@
 	<break strength="strong"/>
 	{7}
 	<break strength="medium"/>
-	<say-as interpret-as="currency">{8} JPY</say-as>
+	<say-as interpret-as="currency">{8} USD</say-as>
 </speak>
