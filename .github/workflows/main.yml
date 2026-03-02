@@ -74,4 +74,5 @@ jobs:
           **/*.msixbundle
           **/*.cer
           **/*.appinstaller
+        include-hidden-files: true
 
