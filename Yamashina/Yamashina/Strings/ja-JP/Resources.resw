@@ -253,4 +253,8 @@
     <value>音声は VOICEVOX: 四国めたんによって生成されました．</value>
     <comment>Credits of the voice.</comment>
   </data>
+  <data name="VoiceSettingCard.Header" xml:space="preserve">
+    <value>音声ガイドを有効にする．</value>
+    <comment>Enabling voice guide.</comment>
+  </data>
 </root>

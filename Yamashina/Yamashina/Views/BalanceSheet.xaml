@@ -35,7 +35,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ListView x:Name="SuperListView"
                   ItemsSource="{x:Bind viewModel.BalanceSheets, Mode=OneWay}"
@@ -121,8 +120,5 @@
         </CommandBar>
         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Uid="VoiceCredit"
                    Grid.Row="5"/>
-        <MediaPlayerElement AreTransportControlsEnabled="False"
-                            x:Name="SuperMediaPlayerElement"
-                            Grid.Row="6"/>
     </Grid>
 </Page>

@@ -6,28 +6,23 @@
     xmlns:local="using:Yamashina.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
-          Padding="12,16"
-          RowSpacing="8">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock x:Uid="BUTitle" Style="{StaticResource TitleTextBlockStyle}"
-                   Grid.ColumnSpan="2"/>
-        <TextBlock x:Uid="Desc2" Style="{StaticResource BodyTextBlockStyle}"
-                   TextWrapping="WrapWholeWords"
-                   Grid.Row="1" Grid.ColumnSpan="2"/>
-        <AppBarButton x:Uid="Backup" Icon="Upload" Grid.Row="2"
-                      x:Name="SuperBackupBtn"/>
-        <TextBlock x:Name="MessageTextBlock"/>
+    <Grid>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      HorizontalScrollMode="Disabled"
+                      VerticalScrollMode="Auto"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical"
+                        Spacing="4">
+                <controls:SettingsCard x:Name="VoiceSettings"
+                                       x:Uid="VoiceSettingCard"
+                                       HeaderIcon="{ui:FontIcon Glyph=&#xE767;}">
+                    <ToggleSwitch x:Name="VoiceSettingSwitch"/>
+                </controls:SettingsCard>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

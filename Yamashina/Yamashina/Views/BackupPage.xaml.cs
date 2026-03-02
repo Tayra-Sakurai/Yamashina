@@ -30,63 +30,28 @@ namespace Yamashina.Views
     /// </summary>
     public sealed partial class BackupPage : Page
     {
-        private readonly string dbPath;
-        private readonly SqliteConnection connection;
-
         public BackupPage()
         {
             InitializeComponent();
 
-            var folder = ApplicationData.Current.LocalFolder;
-            dbPath = Path.Combine(folder.Path, "Takatsuki.db");
-
-            connection = new($"Data Source={dbPath}");
-            SuperBackupBtn.Click += SuperBackupBtn_Click;
+            VoiceSettingSwitch.Toggled += VoiceSettingSwitch_Toggled;
         }
 
-        /// <summary>
-        /// Saves a backup.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">Event args.</param>
-        private async void SuperBackupBtn_Click(object sender, RoutedEventArgs e)
+        private void VoiceSettingSwitch_Toggled(object sender, RoutedEventArgs e)
         {
-            if (sender is AppBarButton button)
-            {
-                button.IsEnabled = false;
+            ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] = VoiceSettingSwitch.IsOn;
+        }
 
-                FileSavePicker picker = new(button.XamlRoot.ContentIslandEnvironment.AppWindowId);
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
 
-                ResourceLoader resourceLoader = new();
+            ApplicationDataContainer settings = ApplicationData.Current.LocalSettings;
 
-                picker.FileTypeChoices.Add(resourceLoader.GetString("DBFile"), new List<string>() { ".db" });
+            if (settings.Values["VoiceGuideEnabled"] is null)
+                settings.Values["VoiceGuideEnabled"] = true;
 
-                picker.DefaultFileExtension = ".db";
-
-                picker.SuggestedFileName = "Database_backup";
-
-                picker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
-
-                picker.SuggestedFolder = "";
-
-                picker.CommitButtonText = resourceLoader.GetString("Sv/Label");
-
-                var result = await picker.PickSaveFileAsync();
-
-                if (result != null)
-                {
-                    string path = result.Path;
-                    SqliteConnection backupConnection = new($"Data Source={path}");
-
-                    connection.Open();
-
-                    connection.BackupDatabase(backupConnection);
-
-                    MessageTextBlock.Text = path;
-                }
-
-                button.IsEnabled = true;
-            }
+            VoiceSettingSwitch.IsOn = (bool)settings.Values["VoiceGuideEnabled"];
         }
     }
 }
