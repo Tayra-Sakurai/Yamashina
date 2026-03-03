@@ -68,7 +68,7 @@ namespace Yamashina.Views
                     resourceLoader.GetString("BlncCol/Content"),
                     sheet.Balance.ToString());
 
-            synth.SpeakSsml(ssmltext);
+            synth.SpeakSsmlAsync(ssmltext);
         }
 
         private void SuperPageCommand_ExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)

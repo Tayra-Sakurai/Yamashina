@@ -52,7 +52,7 @@ namespace Yamashina
                 SuperFrame.Navigate(typeof(BalanceSheet));
             else if (item == resourceLoader.GetString("CB/Content"))
                 SuperFrame.Navigate(typeof(PaymentMethods));
-            else if (item == resourceLoader.GetString("BU/Content"))
+            else if (args.IsSettingsInvoked)
                 SuperFrame.Navigate(typeof(BackupPage));
             else if (item == resourceLoader.GetString("Monthly/Content"))
                 SuperFrame.Navigate(typeof(MonthlyStat));
@@ -70,7 +70,7 @@ namespace Yamashina
                 else if (pageType == typeof(BalanceSheet))
                     BalanceSheetItem.IsSelected = true;
                 else if (pageType == typeof(BackupPage))
-                    BackupPageItem.IsSelected = true;
+                    sender.SelectedItem = sender.SettingsItem;
                 else if (pageType == typeof(MonthlyStat))
                     MonthlyPageItem.IsSelected = true;
             }

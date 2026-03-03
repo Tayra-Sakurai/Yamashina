@@ -10,11 +10,19 @@
     xmlns:ui="using:CommunityToolkit.WinUI"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Padding="12,16"
+          Background="{ThemeResource SolidBackgroundFillColorBaseBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Style="{StaticResource TitleTextBlockStyle}"
+                   x:Uid="BUTitle"/>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                       HorizontalScrollMode="Disabled"
                       VerticalScrollMode="Auto"
-                      VerticalScrollBarVisibility="Auto">
+                      VerticalScrollBarVisibility="Auto"
+                      Grid.Row="1">
             <StackPanel Orientation="Vertical"
                         Spacing="4">
                 <controls:SettingsCard x:Name="VoiceSettings"
@@ -22,6 +30,34 @@
                                        HeaderIcon="{ui:FontIcon Glyph=&#xE767;}">
                     <ToggleSwitch x:Name="VoiceSettingSwitch"/>
                 </controls:SettingsCard>
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                        CornerRadius="{ThemeResource ControlCornerRadius}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="{ThemeResource ExpanderBorderThickness}"
+                        Padding="16">
+                    <StackPanel Orientation="Vertical"
+                                Spacing="12">
+                        <TextBlock Style="{StaticResource SubheaderTextBlockStyle}"
+                                   x:Uid="About"/>
+                        <TextBlock Style="{StaticResource BodyLargeStrongTextBlockStyle}"
+                                   x:Uid="LicenceNotice"/>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}">Copyright &#x00a9; 2026 Tayra Sakurai &lt;<Hyperlink NavigateUri="mailto:b4151069@edu.kit.ac.jp">b4151069&#x0040;edu.kit.ac.jp</Hyperlink>&gt;</TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords"
+                                   x:Uid="LicenceGPL1"/>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords"
+                                   x:Uid="LicenceGPL2"/>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            <Run x:Uid="LicenceGPL3"/>
+                            <Hyperlink NavigateUri="https://www.gnu.org/licenses/gpl.html">
+                                <Run x:Uid="LicenceGPL4"/>
+                            </Hyperlink>
+                            <Run x:Uid="LicenceGPL5"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
             </StackPanel>
         </ScrollViewer>
     </Grid>
