@@ -123,6 +123,15 @@
   <data name="Add.Label" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="ApacheNotice1.Text" xml:space="preserve">
+    <value>is licensed under</value>
+  </data>
+  <data name="ApacheNotice2.Text" xml:space="preserve">
+    <value>the Apache License v 2.0</value>
+  </data>
+  <data name="ApacheNotice3.Text" xml:space="preserve">
+    <value>.</value>
+  </data>
   <data name="Backup.Label" xml:space="preserve">
     <value>Save Backup</value>
   </data>
@@ -203,6 +212,15 @@
   </data>
   <data name="Method.Header" xml:space="preserve">
     <value>Payment Method</value>
+  </data>
+  <data name="MITNotice1.Text" xml:space="preserve">
+    <value>is released under the terms of </value>
+  </data>
+  <data name="MITNotice2.Text" xml:space="preserve">
+    <value>MIT License</value>
+  </data>
+  <data name="MITNotice3.Text" xml:space="preserve">
+    <value>.</value>
   </data>
   <data name="Monthly.Content" xml:space="preserve">
     <value>Monthly Stats</value>

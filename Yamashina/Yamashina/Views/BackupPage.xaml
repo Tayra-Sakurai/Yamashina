@@ -37,7 +37,7 @@
                         Padding="16">
                     <StackPanel Orientation="Vertical"
                                 Spacing="12">
-                        <TextBlock Style="{StaticResource SubheaderTextBlockStyle}"
+                        <TextBlock Style="{StaticResource SubtitleTextBlockStyle}"
                                    x:Uid="About"/>
                         <TextBlock Style="{StaticResource BodyLargeStrongTextBlockStyle}"
                                    x:Uid="LicenceNotice"/>
@@ -55,6 +55,216 @@
                                 <Run x:Uid="LicenceGPL4"/>
                             </Hyperlink>
                             <Run x:Uid="LicenceGPL5"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}">CommunityToolkit.Labs.DataTable</TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            Copyright &#x00a9; .NET Foundation and Contributors
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            <Hyperlink NavigateUri="https://www-0.nuget.org/packages/CommunityToolkit.Labs.WinUI.Controls.DataTable">CommunityToolkit.Labs.WinUI.Controls.DataTable</Hyperlink>
+                            <Run x:Uid="MITNotice1"/>
+                            <Hyperlink NavigateUri="https://opensource.org/license/MIT">
+                                <Run x:Uid="MITNotice2"/>
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice3"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}">
+                            CommunityToolkit.Mvvm
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            Copyright © .NET Foundation and Contributors
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            <Hyperlink NavigateUri="https://www.nuget.org/packages/CommunityToolkit.Mvvm/8.4.0">
+                                CommunityToolkit.Mvvm
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice1"/>
+                            <Hyperlink NavigateUri="https://opensource.org/license/MIT">
+                                <Run x:Uid="MITNotice2"/>
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice3"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}">
+                            CommunityToolkit.WinUI.Behaviors
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            Copyright © .NET Foundation and Contributors
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            <Hyperlink NavigateUri="https://www.nuget.org/packages/CommunityToolkit.WinUI.Behaviors/8.2.251219">CommunityToolkit.WinUI.Behaviors</Hyperlink>
+                            <Run x:Uid="MITNotice1"/>
+                            <Hyperlink NavigateUri="https://opensource.org/license/MIT">
+                                <Run x:Uid="MITNotice2"/>
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice3"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}">
+                            CommunityToolkit.WinUI.Controls.SettingsControls
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            Copyright © .NET Foundation and Contributors
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            <Hyperlink NavigateUri="https://www.nuget.org/packages/CommunityToolkit.WinUI.Controls.SettingsControls/8.2.251219">
+                                CommunityToolkit.WinUI.Controls.SettingsControls
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice1"/>
+                            <Hyperlink NavigateUri="https://opensource.org/license/MIT">
+                                <Run x:Uid="MITNotice2"/>
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice3"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}">
+                            CommunityToolkit.WinUI.Controls.Sizers
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            Copyright © .NET Foundation and Contributors
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            <Hyperlink NavigateUri="https://www.nuget.org/packages/CommunityToolkit.WinUI.Controls.Sizers/8.2.251219">
+                                CommunityToolkit.WinUI.Controls.Sizers
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice1"/>
+                            <Hyperlink NavigateUri="https://opensource.org/license/MIT">
+                                <Run x:Uid="MITNotice2"/>
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice3"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}">
+                            CommunityToolkit.WinUI.Converters
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            Copyright © .NET Foundation and Contributors
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            <Hyperlink NavigateUri="https://www.nuget.org/packages/CommunityToolkit.WinUI.Converters/8.2.251219">
+                                CommunityToolkit.WinUI.Converters
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice1"/>
+                            <Hyperlink NavigateUri="https://opensource.org/license/MIT">
+                                <Run x:Uid="MITNotice2"/>
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice3"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}">
+                            Google.GenAI
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            Copyright © 2025 Google LLC
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            <Hyperlink NavigateUri="https://www.nuget.org/packages/Google.GenAI/1.2.0">
+                                Google.GenAI
+                            </Hyperlink>
+                            <Run x:Uid="ApacheNotice1"/>
+                            <Hyperlink NavigateUri="https://www.apache.org/licenses/LICENSE-2.0">
+                                <Run x:Uid="ApacheNotice2"/>
+                            </Hyperlink>
+                            <Run x:Uid="ApacheNotice3"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}">
+                            Microsoft.Data.Sqlite
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            Copyright © Microsoft Corporation. All rights reserved.
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            <Hyperlink NavigateUri="https://www.nuget.org/packages/Microsoft.Data.Sqlite/10.0.3">
+                                Microsoft.Data.Sqlite
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice1"/>
+                            <Hyperlink NavigateUri="https://opensource.org/license/MIT">
+                                <Run x:Uid="MITNotice2"/>
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice3"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}">
+                            Microsoft.EntityFrameworkCore
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            Copyright © Microsoft Corporation. All rights reserved.
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            <Hyperlink NavigateUri="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/9.0.13">
+                                Microsoft.EntityFrameworkCore
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice1"/>
+                            <Hyperlink NavigateUri="https://opensource.org/license/MIT">
+                                <Run x:Uid="MITNotice2"/>
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice3"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}">
+                            Microsoft.EntityFrameworkCore.Sqlite
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            Copyright © Microsoft Corporation. All rights reserved.
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            <Hyperlink NavigateUri="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/9.0.13">
+                                Microsoft.EntityFrameworkCore.Sqlite
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice1"/>
+                            <Hyperlink NavigateUri="https://opensource.org/license/MIT">
+                                <Run x:Uid="MITNotice2"/>
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice3"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}">
+                            Microsoft.Extensions.AI
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            Copyright © Microsoft Corporation. All rights reserved.
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            <Hyperlink NavigateUri="https://www.nuget.org/packages/Microsoft.Extensions.AI/10.3.0">
+                                Microsoft.Extensions.AI
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice1"/>
+                            <Hyperlink NavigateUri="https://opensource.org/license/MIT">
+                                <Run x:Uid="MITNotice2"/>
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice3"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}">
+                            Microsoft.Extensions.DependencyInjection
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            Copyright © Microsoft Corporation. All rights reserved.
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            <Hyperlink NavigateUri="https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection/10.0.3">
+                                Microsoft.Extensions.DependencyInjection
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice1"/>
+                            <Hyperlink NavigateUri="https://opensource.org/license/MIT">
+                                <Run x:Uid="MITNotice2"/>
+                            </Hyperlink>
+                            <Run x:Uid="MITNotice3"/>
                         </TextBlock>
                     </StackPanel>
                 </Border>

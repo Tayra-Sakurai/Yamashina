@@ -125,6 +125,18 @@
     <value>追加</value>
     <comment>Adding button.</comment>
   </data>
+  <data name="ApacheNotice1.Text" xml:space="preserve">
+    <value>は</value>
+    <comment>Text between the program name and the license link.</comment>
+  </data>
+  <data name="ApacheNotice2.Text" xml:space="preserve">
+    <value>Apache 2.0 ライセンス</value>
+    <comment>License name.</comment>
+  </data>
+  <data name="ApacheNotice3.Text" xml:space="preserve">
+    <value>の下で配布されています．</value>
+    <comment>The last part of the notice.</comment>
+  </data>
   <data name="Backup.Label" xml:space="preserve">
     <value>バックアップする</value>
     <comment>Backup button label.</comment>
@@ -232,6 +244,18 @@
   <data name="Method.Header" xml:space="preserve">
     <value>手段</value>
     <comment>Payment method combobox header.</comment>
+  </data>
+  <data name="MITNotice1.Text" xml:space="preserve">
+    <value>は</value>
+    <comment>Text between the name of the library and the licence link.</comment>
+  </data>
+  <data name="MITNotice2.Text" xml:space="preserve">
+    <value>MIT ライセンス</value>
+    <comment>The hyperlink text.</comment>
+  </data>
+  <data name="MITNotice3.Text" xml:space="preserve">
+    <value>の下で配布されています．</value>
+    <comment>The last part of the MIT Licence notice.</comment>
   </data>
   <data name="Monthly.Content" xml:space="preserve">
     <value>月ごとの項目</value>
