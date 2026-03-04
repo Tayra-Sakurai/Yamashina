@@ -302,7 +302,7 @@
     <comment>Time picker.</comment>
   </data>
   <data name="VoiceCredit.Text" xml:space="preserve">
-    <value>音声は VOICEVOX: 四国めたんによって生成されました．</value>
+    <value>音声は VOICEVOX: 四国めたん と VOICEVOX: 雨晴はう によって生成されました．</value>
     <comment>Credits of the voice.</comment>
   </data>
   <data name="VoiceSettingCard.Header" xml:space="preserve">

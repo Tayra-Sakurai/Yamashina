@@ -14,6 +14,8 @@ using System.Linq;
 using System.Speech.Synthesis;
 using System.Text;
 using Takatsuki.ViewModels;
+using Windows.Media.Core;
+using Windows.Media.Playback;
 using Windows.Storage;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -27,6 +29,7 @@ namespace Yamashina.Views
     public sealed partial class BalanceSheet : Page
     {
         private EntitiesViewModel? viewModel;
+        private MediaPlayer mediaPlayer;
 
         public BalanceSheet()
         {
@@ -34,10 +37,82 @@ namespace Yamashina.Views
 
             viewModel = App.Current.Service.GetService<EntitiesViewModel>();
 
+            mediaPlayer = new();
+
             SuperPageCommand.CanExecuteRequested += SuperPageCommand_CanExecuteRequested;
             SuperPageCommand.ExecuteRequested += SuperPageCommand_ExecuteRequested;
 
             SuperListView.ItemClick += SuperListView_ItemClick;
+
+            AddButton.PointerEntered += AddButton_PointerEntered;
+            RemoveButton.PointerEntered += RemoveButton_PointerEntered;
+            DetailButton.PointerEntered += DetailButton_PointerEntered;
+            FilterButton.PointerEntered += FilterButton_PointerEntered;
+            SyncButton.PointerEntered += SyncButton_PointerEntered;
+            SuperSearchButton.PointerEntered += SuperSearchButton_PointerEntered;
+
+            AddButton.PointerExited += PointerExitedAction;
+            RemoveButton.PointerExited += PointerExitedAction;
+            DetailButton.PointerExited += PointerExitedAction;
+            FilterButton.PointerExited += PointerExitedAction;
+            SyncButton.PointerExited += PointerExitedAction;
+            SuperSearchButton.PointerExited += PointerExitedAction;
+        }
+
+        private void PointerExitedAction(object sender, PointerRoutedEventArgs e)
+        {
+            if (ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] is not true)
+                return;
+
+            StopPlay();
+        }
+
+        private void SuperSearchButton_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] is not true)
+                return;
+
+            PlayMedia(new("ms-appx:///Assets/Voices/searchDesc.wav"));
+        }
+
+        private void SyncButton_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] is not true)
+                return;
+
+            PlayMedia(new("ms-appx:///Assets/Voices/syncDesc.wav"));
+        }
+
+        private void FilterButton_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] is not true)
+                return;
+
+            PlayMedia(new Uri("ms-appx:///Assets/Voices/filterDesc.wav"));
+        }
+
+        private void DetailButton_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] is not true)
+                return;
+
+            PlayMedia(new Uri("ms-appx:///Assets/Voices/detailButtonDesc.wav"));
+        }
+
+        private void RemoveButton_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] is not true)
+                return;
+
+            PlayMedia(new Uri("ms-appx:///Assets/Voices/removeDesc.wav"));
+        }
+
+        private void AddButton_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] is not true)
+                return;
+
+            PlayMedia(new Uri("ms-appx:///Assets/Voices/addDesc.wav"));
         }
 
         private async void SuperListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -69,6 +144,23 @@ namespace Yamashina.Views
                     sheet.Balance.ToString());
 
             synth.SpeakSsmlAsync(ssmltext);
+        }
+
+        private void PlayMedia(Uri uri)
+        {
+            mediaPlayer = new()
+            {
+                Source = MediaSource.CreateFromUri(uri)
+            };
+
+            mediaPlayer.Play();
+        }
+
+        private void StopPlay()
+        {
+            if (mediaPlayer.PlaybackSession.CanPause)
+                mediaPlayer.Pause();
+            mediaPlayer.Dispose();
         }
 
         private void SuperPageCommand_ExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)

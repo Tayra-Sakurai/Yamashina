@@ -101,18 +101,24 @@
                     HorizontalAlignment="Stretch"
                     x:Name="SuperComboBox">
             <AppBarButton Icon="Add" x:Uid="Add"
-                          Command="{x:Bind viewModel.AddCommand}"/>
+                          Command="{x:Bind viewModel.AddCommand}"
+                          x:Name="AddButton"/>
             <AppBarButton Icon="Delete" x:Uid="Del"
                           Command="{x:Bind viewModel.RemoveCommand}"
-                          CommandParameter="{Binding ElementName=SuperListView, Path=SelectedItem}"/>
+                          CommandParameter="{Binding ElementName=SuperListView, Path=SelectedItem}"
+                          x:Name="RemoveButton"/>
             <AppBarButton x:Uid="Dtl" Command="{StaticResource SuperPageCommand}"
-                          CommandParameter="{Binding SelectedItem, ElementName=SuperListView}"/>
+                          CommandParameter="{Binding SelectedItem, ElementName=SuperListView}"
+                          x:Name="DetailButton"/>
             <AppBarButton x:Uid="Sv" Command="{x:Bind viewModel.SaveCommand}"
-                          Icon="Save"/>
+                          Icon="Save"
+                          x:Name="SaveButton"/>
             <AppBarButton x:Uid="Flt" Command="{x:Bind viewModel.FilterCommand}"
-                          Icon="Filter"/>
+                          Icon="Filter"
+                          x:Name="FilterButton"/>
             <AppBarButton x:Uid="Sync" Icon="Sync"
-                          Command="{x:Bind viewModel.LoadCommand}"/>
+                          Command="{x:Bind viewModel.LoadCommand}"
+                          x:Name="SyncButton"/>
             <AppBarButton x:Uid="Srch" Icon="Find"
                           Command="{x:Bind viewModel.SearchCommand}"
                           CommandParameter="{Binding Text, ElementName=SuperSearchBox}"

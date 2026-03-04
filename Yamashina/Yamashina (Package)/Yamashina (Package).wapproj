@@ -117,6 +117,7 @@
     <Content Include="Assets\Images\Square44x44Logo.targetsize-256.png" />
     <Content Include="Assets\Images\Square44x44Logo.targetsize-32.png" />
     <Content Include="Assets\Images\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Assets\Images\StoreLogo.backup.png" />
     <Content Include="Assets\Images\StoreLogo.scale-100.png" />
     <Content Include="Assets\Images\StoreLogo.scale-125.png" />
     <Content Include="Assets\Images\StoreLogo.scale-150.png" />
@@ -127,15 +128,39 @@
     <Content Include="Assets\Images\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Images\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Images\Wide310x150Logo.scale-400.png" />
+    <Content Include="Assets\Voices\en-GB\addDesc.wav" />
+    <Content Include="Assets\Voices\en-GB\detailButtonDesc.wav" />
     <Content Include="Assets\Voices\en-GB\detaildesc.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Voices\en-GB\filterDesc.wav" />
+    <Content Include="Assets\Voices\en-GB\removeDesc.wav" />
+    <Content Include="Assets\Voices\en-GB\searchDesc.wav" />
+    <Content Include="Assets\Voices\en-GB\syncDesc.wav" />
+    <Content Include="Assets\Voices\en-US\addDesc.wav" />
+    <Content Include="Assets\Voices\en-US\detailButtonDesc.wav" />
     <Content Include="Assets\Voices\en-US\detaildesc.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Voices\en-US\filterDesc.wav" />
+    <Content Include="Assets\Voices\en-US\removeDesc.wav" />
+    <Content Include="Assets\Voices\en-US\searchDesc.wav" />
+    <Content Include="Assets\Voices\en-US\syncDesc.wav" />
+    <Content Include="Assets\Voices\en\addDesc.wav" />
+    <Content Include="Assets\Voices\en\detailButtonDesc.wav" />
     <Content Include="Assets\Voices\en\detaildesc.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Voices\en\filterDesc.wav" />
+    <Content Include="Assets\Voices\en\removeDesc.wav" />
+    <Content Include="Assets\Voices\en\searchDesc.wav" />
+    <Content Include="Assets\Voices\en\syncDesc.wav" />
+    <Content Include="Assets\Voices\ja-JP\addDesc.wav" />
+    <Content Include="Assets\Voices\ja-JP\removeDesc.wav" />
+    <Content Include="Assets\Voices\ja-JP\detailButtonDesc.wav" />
+    <Content Include="Assets\Voices\ja-JP\filterDesc.wav" />
+    <Content Include="Assets\Voices\ja-JP\syncDesc.wav" />
+    <Content Include="Assets\Voices\ja-JP\searchDesc.wav" />
     <Content Include="Assets\Voices\ja-JP\detaildesc.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
