@@ -50,6 +50,7 @@ namespace Yamashina.Views
             FilterButton.PointerEntered += FilterButton_PointerEntered;
             SyncButton.PointerEntered += SyncButton_PointerEntered;
             SuperSearchButton.PointerEntered += SuperSearchButton_PointerEntered;
+            SaveButton.PointerEntered += SaveButton_PointerEntered;
 
             AddButton.PointerExited += PointerExitedAction;
             RemoveButton.PointerExited += PointerExitedAction;
@@ -57,6 +58,15 @@ namespace Yamashina.Views
             FilterButton.PointerExited += PointerExitedAction;
             SyncButton.PointerExited += PointerExitedAction;
             SuperSearchButton.PointerExited += PointerExitedAction;
+            SaveButton.PointerExited += PointerExitedAction;
+        }
+
+        private void SaveButton_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] is not true)
+                return;
+
+            PlayMedia(new("ms-appx:///Assets/Voices/saveDesc.wav"));
         }
 
         private void PointerExitedAction(object sender, PointerRoutedEventArgs e)

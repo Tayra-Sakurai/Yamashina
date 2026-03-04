@@ -135,6 +135,7 @@
     </Content>
     <Content Include="Assets\Voices\en-GB\filterDesc.wav" />
     <Content Include="Assets\Voices\en-GB\removeDesc.wav" />
+    <Content Include="Assets\Voices\en-GB\saveDesc.wav" />
     <Content Include="Assets\Voices\en-GB\searchDesc.wav" />
     <Content Include="Assets\Voices\en-GB\syncDesc.wav" />
     <Content Include="Assets\Voices\en-US\addDesc.wav" />
@@ -144,6 +145,7 @@
     </Content>
     <Content Include="Assets\Voices\en-US\filterDesc.wav" />
     <Content Include="Assets\Voices\en-US\removeDesc.wav" />
+    <Content Include="Assets\Voices\en-US\saveDesc.wav" />
     <Content Include="Assets\Voices\en-US\searchDesc.wav" />
     <Content Include="Assets\Voices\en-US\syncDesc.wav" />
     <Content Include="Assets\Voices\en\addDesc.wav" />
@@ -153,12 +155,14 @@
     </Content>
     <Content Include="Assets\Voices\en\filterDesc.wav" />
     <Content Include="Assets\Voices\en\removeDesc.wav" />
+    <Content Include="Assets\Voices\en\saveDesc.wav" />
     <Content Include="Assets\Voices\en\searchDesc.wav" />
     <Content Include="Assets\Voices\en\syncDesc.wav" />
     <Content Include="Assets\Voices\ja-JP\addDesc.wav" />
     <Content Include="Assets\Voices\ja-JP\removeDesc.wav" />
     <Content Include="Assets\Voices\ja-JP\detailButtonDesc.wav" />
     <Content Include="Assets\Voices\ja-JP\filterDesc.wav" />
+    <Content Include="Assets\Voices\ja-JP\saveDesc.wav" />
     <Content Include="Assets\Voices\ja-JP\syncDesc.wav" />
     <Content Include="Assets\Voices\ja-JP\searchDesc.wav" />
     <Content Include="Assets\Voices\ja-JP\detaildesc.wav">
