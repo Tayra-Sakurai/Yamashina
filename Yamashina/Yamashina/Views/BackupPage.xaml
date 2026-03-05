@@ -167,7 +167,7 @@
                         </TextBlock>
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                                    TextWrapping="WrapWholeWords">
-                            <Hyperlink NavigateUri="https://www.nuget.org/packages/Google.GenAI/1.2.0">
+                            <Hyperlink NavigateUri="https://www.nuget.org/packages/Google.GenAI/1.3.0">
                                 Google.GenAI
                             </Hyperlink>
                             <Run x:Uid="ApacheNotice1"/>
