@@ -128,51 +128,150 @@
     <Content Include="Assets\Images\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Images\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Images\Wide310x150Logo.scale-400.png" />
-    <Content Include="Assets\Voices\en-GB\addDesc.wav" />
-    <Content Include="Assets\Voices\en-GB\detailButtonDesc.wav" />
+    <Content Include="Assets\SSMLTemplates\en-GB\Template_Method.ssml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\SSMLTemplates\en\Template_Method.ssml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\SSMLTemplates\ja-JP\Template_Balance.ssml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\SSMLTemplates\ja-JP\Template_Method.ssml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\SSMLTemplates\Template_Method.ssml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-GB\addDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-GB\ComboBoxDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-GB\detailButtonDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Voices\en-GB\detaildesc.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Voices\en-GB\filterDesc.wav" />
-    <Content Include="Assets\Voices\en-GB\removeDesc.wav" />
-    <Content Include="Assets\Voices\en-GB\saveDesc.wav" />
-    <Content Include="Assets\Voices\en-GB\searchDesc.wav" />
-    <Content Include="Assets\Voices\en-GB\syncDesc.wav" />
-    <Content Include="Assets\Voices\en-US\addDesc.wav" />
-    <Content Include="Assets\Voices\en-US\detailButtonDesc.wav" />
+    <Content Include="Assets\Voices\en-GB\filterDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-GB\removeDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-GB\saveDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-GB\searchBoxDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-GB\searchDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-GB\syncDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-US\addDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-US\ComboBoxDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-US\detailButtonDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Voices\en-US\detaildesc.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Voices\en-US\filterDesc.wav" />
-    <Content Include="Assets\Voices\en-US\removeDesc.wav" />
-    <Content Include="Assets\Voices\en-US\saveDesc.wav" />
-    <Content Include="Assets\Voices\en-US\searchDesc.wav" />
-    <Content Include="Assets\Voices\en-US\syncDesc.wav" />
-    <Content Include="Assets\Voices\en\addDesc.wav" />
-    <Content Include="Assets\Voices\en\detailButtonDesc.wav" />
+    <Content Include="Assets\Voices\en-US\filterDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-US\removeDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-US\saveDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-US\searchBoxDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-US\searchDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en-US\syncDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en\addDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en\ComboBoxDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en\detailButtonDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Voices\en\detaildesc.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Voices\en\filterDesc.wav" />
-    <Content Include="Assets\Voices\en\removeDesc.wav" />
-    <Content Include="Assets\Voices\en\saveDesc.wav" />
-    <Content Include="Assets\Voices\en\searchDesc.wav" />
-    <Content Include="Assets\Voices\en\syncDesc.wav" />
-    <Content Include="Assets\Voices\ja-JP\addDesc.wav" />
-    <Content Include="Assets\Voices\ja-JP\removeDesc.wav" />
-    <Content Include="Assets\Voices\ja-JP\detailButtonDesc.wav" />
-    <Content Include="Assets\Voices\ja-JP\filterDesc.wav" />
-    <Content Include="Assets\Voices\ja-JP\saveDesc.wav" />
-    <Content Include="Assets\Voices\ja-JP\syncDesc.wav" />
-    <Content Include="Assets\Voices\ja-JP\searchDesc.wav" />
+    <Content Include="Assets\Voices\en\filterDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en\removeDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en\saveDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en\searchBoxDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en\searchDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\en\syncDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\ja-JP\addDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\ja-JP\ComboBoxDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\ja-JP\removeDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\ja-JP\detailButtonDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\ja-JP\filterDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\ja-JP\saveDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\ja-JP\searchBoxDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\ja-JP\syncDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Voices\ja-JP\searchDesc.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Voices\ja-JP\detaildesc.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\SSMLTemplates\Template_Balance.ssml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Assets\SSMLTemplates\en-GB\Template_Balance.ssml" />
-    <None Include="Assets\SSMLTemplates\en\Template_Balance.ssml" />
+    <Content Include="Assets\SSMLTemplates\en-GB\Template_Balance.ssml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\SSMLTemplates\en\Template_Balance.ssml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Yamashina %28Package%29_TemporaryKey.pfx" />
     <None Include="Yamashina %28Package%29_TemporaryKey_Base64.txt" />
   </ItemGroup>

@@ -83,7 +83,7 @@
         </ListView>
         <ComboBox ItemsSource="{x:Bind viewModel.PaymentMethods, Mode=OneTime, Converter={StaticResource MethodsConverter}}"
                   SelectedItem="{x:Bind viewModel.Filtered, Mode=TwoWay, Converter={StaticResource MethodSingleConverter}}"
-                  x:Uid="Method" Grid.Row="1"/>
+                  x:Uid="Method" Grid.Row="1" x:Name="MethodComboBox"/>
         <TextBox x:Name="SuperSearchBox" x:Uid="Q" Grid.ColumnSpan="3" Grid.Row="2"/>
         <MediaPlayerElement Source="ms-appx:///Assets/Voices/detaildesc.wav"
                             HorizontalAlignment="Stretch"

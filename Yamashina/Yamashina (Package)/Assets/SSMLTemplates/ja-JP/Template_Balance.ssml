@@ -1,0 +1,19 @@
+﻿<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="https://www.w3.org/2001/mstts" xml:lang="ja-jp">
+	{0}
+	<break strength="medium"/>
+	<say-as interpret-as="date" format="ymd">{1}</say-as>
+	<break strength="weak"/>
+	<say-as interpret-as="time" format="hms24">{2}</say-as>
+	<break strength="strong"/>
+	{3}
+	<break strength="medium"/>
+	{4}
+	<break strength="strong"/>
+	{5}
+	<break strength="medium"/>
+	{6}
+	<break strength="strong"/>
+	{7}
+	<break strength="medium"/>
+	<say-as interpret-as="currency">{8} JPY</say-as>
+</speak>

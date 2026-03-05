@@ -9,14 +9,18 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Windows.ApplicationModel.Resources;
 using System;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Speech.Synthesis;
 using System.Text;
 using Takatsuki.ViewModels;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 using Windows.Storage;
+using Yamashina.Extensions;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -29,15 +33,13 @@ namespace Yamashina.Views
     public sealed partial class BalanceSheet : Page
     {
         private EntitiesViewModel? viewModel;
-        private MediaPlayer mediaPlayer;
+        private MediaPlayer? mediaPlayer;
 
         public BalanceSheet()
         {
             InitializeComponent();
 
             viewModel = App.Current.Service.GetService<EntitiesViewModel>();
-
-            mediaPlayer = new();
 
             SuperPageCommand.CanExecuteRequested += SuperPageCommand_CanExecuteRequested;
             SuperPageCommand.ExecuteRequested += SuperPageCommand_ExecuteRequested;
@@ -51,6 +53,8 @@ namespace Yamashina.Views
             SyncButton.PointerEntered += SyncButton_PointerEntered;
             SuperSearchButton.PointerEntered += SuperSearchButton_PointerEntered;
             SaveButton.PointerEntered += SaveButton_PointerEntered;
+            MethodComboBox.PointerEntered += SuperComboBox_PointerEntered;
+            SuperSearchBox.PointerEntered += SuperSearchBox_PointerEntered;
 
             AddButton.PointerExited += PointerExitedAction;
             RemoveButton.PointerExited += PointerExitedAction;
@@ -59,6 +63,45 @@ namespace Yamashina.Views
             SyncButton.PointerExited += PointerExitedAction;
             SuperSearchButton.PointerExited += PointerExitedAction;
             SaveButton.PointerExited += PointerExitedAction;
+            MethodComboBox.PointerExited += PointerExitedAction;
+            SuperSearchBox.PointerExited += PointerExitedAction;
+
+            MethodComboBox.SelectionChanged += SuperComboBox_SelectionChanged;
+        }
+
+        private async void SuperComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] is not true)
+                return;
+
+            SpeechSynthesizer synth = new();
+            StorageFile ssmlTemplate = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/SSMLTemplates/Template_Method.ssml"));
+
+            Takatsuki.Models.PaymentMethod? method = MethodComboBox.SelectedItem as Takatsuki.Models.PaymentMethod;
+            if (method == null) return;
+
+            synth.SelectVoiceByLanguage(CultureInfo.CurrentCulture.Name);
+
+            synth.SpeakSsmlAsync(
+                string.Format(
+                    await FileIO.ReadTextAsync(ssmlTemplate),
+                    method.Name));
+        }
+
+        private void SuperSearchBox_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] is not true)
+                return;
+
+            PlayMedia(new("ms-appx:///Assets/Voices/searchBoxDesc.wav"));
+        }
+
+        private void SuperComboBox_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] is not true)
+                return;
+
+            PlayMedia(new("ms-appx:///Assets/Voices/ComboBoxDesc.wav"));
         }
 
         private void SaveButton_PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -131,9 +174,10 @@ namespace Yamashina.Views
                 return;
 
             SpeechSynthesizer synth = new SpeechSynthesizer();
-            Takatsuki.Models.BalanceSheet? sheet = e.ClickedItem as Takatsuki.Models.BalanceSheet;
 
-            if (sheet == null)
+            synth.SelectVoiceByLanguage(CultureInfo.CurrentCulture);
+
+            if (e.ClickedItem is not Takatsuki.Models.BalanceSheet sheet)
                 return;
 
             StorageFile ssmlTemplate = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/SSMLTemplates/Template_Balance.ssml"));
@@ -168,9 +212,28 @@ namespace Yamashina.Views
 
         private void StopPlay()
         {
-            if (mediaPlayer.PlaybackSession.CanPause)
-                mediaPlayer.Pause();
-            mediaPlayer.Dispose();
+            if (mediaPlayer != null)
+            {
+
+                try
+                {
+                    MediaPlaybackSession session = mediaPlayer.PlaybackSession;
+                    bool canPause = session.CanPause;
+                    if (canPause)
+                        mediaPlayer.Pause();
+                }
+                catch (COMException comException)
+                {
+                    Debug.WriteLine("COMException: " + comException.Message);
+                    throw new COMException(comException.Message, comException);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    throw new Exception(ex.Message, ex);
+                }
+                mediaPlayer.Dispose();
+            }
         }
 
         private void SuperPageCommand_ExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)

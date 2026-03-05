@@ -11,12 +11,16 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.Json;
+using Takatsuki.Contexts;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Yamashina.Views;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -78,7 +82,7 @@ namespace Yamashina
                 SuperNavigation.IsBackEnabled = false;
         }
 
-        private void SuperFrame_Navigated(object sender, NavigatingCancelEventArgs e)
+        private async void SuperFrame_Navigated(object sender, NavigatingCancelEventArgs e)
         {
             if (currentPage != null)
             {
@@ -87,6 +91,58 @@ namespace Yamashina
                     SuperNavigation.IsBackEnabled = true;
             }
             currentPage = e.SourcePageType;
+
+            string? pageType = e.SourcePageType.FullName;
+            object? param = e.Parameter;
+            string? paramType = null;
+
+            if (pageType == null)
+                return;
+
+            if (param is Takatsuki.Models.BalanceSheet p)
+            {
+                paramType = typeof(Takatsuki.Models.BalanceSheet).FullName;
+                using (TakatsukiContext context = new())
+                {
+                    param = context.BalanceSheet.Find(p.Id);
+                }
+            }
+            else if (param is Takatsuki.Models.PaymentMethod p1)
+            {
+                paramType = typeof(Takatsuki.Models.PaymentMethod).FullName;
+                using (TakatsukiContext ctx = new())
+                {
+                    param = ctx.PaymentMethods.Find(p1.Id);
+                }
+            }
+            else if (param is not null)
+            {
+                paramType = param.GetType().FullName;
+            }
+
+            PageSaveData pageSaveData = new PageSaveData
+            {
+                PageType = pageType,
+                Parameters = param,
+                ParamType = paramType,
+            };
+
+            IStorageItem? item = await ApplicationData.Current.LocalCacheFolder.TryGetItemAsync("cachedpage.json");
+
+            if (item != null)
+            {
+                if (item.IsOfType(StorageItemTypes.File))
+                {
+                    StorageFile file = (StorageFile)item;
+
+                    await FileIO.WriteTextAsync(file, JsonSerializer.Serialize(pageSaveData));
+                }
+
+                return;
+            }
+
+            StorageFile storageFile = await ApplicationData.Current.LocalCacheFolder.CreateFileAsync("cachedpage.json");
+            await FileIO.WriteTextAsync(storageFile, JsonSerializer.Serialize(pageSaveData));
         }
 
         private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
