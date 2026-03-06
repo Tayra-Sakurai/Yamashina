@@ -107,15 +107,12 @@ namespace Takatsuki.ViewModels
             };
         }
 
-        public BalanceSheetViewModel(BalanceSheet model)
-            : this()
+        public async Task InitializeForExistingValue(BalanceSheet model)
         {
-            InitializeForExistingValue(model);
-        }
-
-        public void InitializeForExistingValue(BalanceSheet model)
-        {
-            this.model = model;
+            this.model = 
+                await context
+                .BalanceSheet
+                .FirstAsync(e => e.Id == model.Id);
             OnPropertyChanged();
         }
 

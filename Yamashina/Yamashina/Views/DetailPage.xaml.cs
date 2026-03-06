@@ -38,13 +38,13 @@ namespace Yamashina.Views
             viewModel = App.Current.Service.GetService<BalanceSheetViewModel>();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             if (viewModel != null)
                 if(e.Parameter is Takatsuki.Models.BalanceSheet balance)
-                    viewModel.InitializeForExistingValue(balance);
+                    await viewModel.InitializeForExistingValue(balance);
             Debug.WriteLine(viewModel?.Model?.ToString());
         }
     }

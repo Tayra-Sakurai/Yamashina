@@ -7,7 +7,7 @@ using Yamashina.Views;
 
 namespace Yamashina
 {
-    internal readonly struct PageSaveData
+    internal class PageSaveData
     {
         public string PageType { get; init; }
         public string? ParamType { get; init; }
@@ -15,8 +15,19 @@ namespace Yamashina
 
         public PageSaveData()
         {
-            if (PageType == null)
-                PageType = nameof(BalanceSheet);
+            PageType ??= nameof(BalanceSheet);
+        }
+    }
+
+    internal class PageSaveData<TParameter>
+    {
+        public string PageType { get; init; }
+        public string? ParamType { get; init; }
+        public required TParameter Parameters { get; init; }
+
+        public PageSaveData()
+        {
+            PageType ??= nameof(BalanceSheet);
         }
     }
 }

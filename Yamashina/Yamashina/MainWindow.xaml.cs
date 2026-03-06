@@ -14,14 +14,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Reflection;
 using System.Text.Json;
 using Takatsuki.Contexts;
+using Takatsuki.Models;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
-using Yamashina.Views;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -40,7 +38,7 @@ namespace Yamashina
         {
             InitializeComponent();
 
-            pages = [typeof(BalanceSheet)];
+            pages = [typeof(Views.BalanceSheet)];
 
             Activated += MainWindow_Activated;
             SuperFrame.Navigating += SuperFrame_Navigated;
@@ -53,13 +51,13 @@ namespace Yamashina
             string item = (string)args.InvokedItem;
             ResourceLoader resourceLoader = new();
             if (item == resourceLoader.GetString("BS/Content"))
-                SuperFrame.Navigate(typeof(BalanceSheet));
+                SuperFrame.Navigate(typeof(Views.BalanceSheet));
             else if (item == resourceLoader.GetString("CB/Content"))
-                SuperFrame.Navigate(typeof(PaymentMethods));
+                SuperFrame.Navigate(typeof(Views.PaymentMethods));
             else if (args.IsSettingsInvoked)
-                SuperFrame.Navigate(typeof(BackupPage));
+                SuperFrame.Navigate(typeof(Views.BackupPage));
             else if (item == resourceLoader.GetString("Monthly/Content"))
-                SuperFrame.Navigate(typeof(MonthlyStat));
+                SuperFrame.Navigate(typeof(Views.MonthlyStat));
         }
 
         private void SuperNavigation_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
@@ -69,13 +67,13 @@ namespace Yamashina
                 Type pageType = pages.Last();
                 SuperFrame.Navigate(pageType, null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
                 pages.RemoveAt(pages.Count - 1);
-                if (pageType == typeof(PaymentMethods))
+                if (pageType == typeof(Views.PaymentMethods))
                     CurrentBalanceItem.IsSelected = true;
-                else if (pageType == typeof(BalanceSheet))
+                else if (pageType == typeof(Views.BalanceSheet))
                     BalanceSheetItem.IsSelected = true;
-                else if (pageType == typeof(BackupPage))
+                else if (pageType == typeof(Views.BackupPage))
                     sender.SelectedItem = sender.SettingsItem;
-                else if (pageType == typeof(MonthlyStat))
+                else if (pageType == typeof(Views.MonthlyStat))
                     MonthlyPageItem.IsSelected = true;
             }
             else
@@ -92,24 +90,24 @@ namespace Yamashina
             }
             currentPage = e.SourcePageType;
 
-            string? pageType = e.SourcePageType.FullName;
+            string? pageType = e.SourcePageType.AssemblyQualifiedName;
             object? param = e.Parameter;
             string? paramType = null;
 
             if (pageType == null)
                 return;
 
-            if (param is Takatsuki.Models.BalanceSheet p)
+            if (param is BalanceSheet p)
             {
-                paramType = typeof(Takatsuki.Models.BalanceSheet).FullName;
+                paramType = typeof(BalanceSheet).AssemblyQualifiedName;
                 using (TakatsukiContext context = new())
                 {
                     param = context.BalanceSheet.Find(p.Id);
                 }
             }
-            else if (param is Takatsuki.Models.PaymentMethod p1)
+            else if (param is PaymentMethod p1)
             {
-                paramType = typeof(Takatsuki.Models.PaymentMethod).FullName;
+                paramType = typeof(PaymentMethod).AssemblyQualifiedName;
                 using (TakatsukiContext ctx = new())
                 {
                     param = ctx.PaymentMethods.Find(p1.Id);
@@ -117,7 +115,7 @@ namespace Yamashina
             }
             else if (param is not null)
             {
-                paramType = param.GetType().FullName;
+                paramType = param.GetType().AssemblyQualifiedName;
             }
 
             PageSaveData pageSaveData = new PageSaveData
@@ -145,10 +143,76 @@ namespace Yamashina
             await FileIO.WriteTextAsync(storageFile, JsonSerializer.Serialize(pageSaveData));
         }
 
-        private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
+        private async void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
         {
             if (SuperFrame.Content == null)
-                SuperFrame.Navigate(typeof(BalanceSheet));
+            {
+                StorageFolder localCache = ApplicationData.Current.LocalCacheFolder;
+                IStorageItem? storageItem = await localCache.TryGetItemAsync("cachedpage.json");
+                if (storageItem.IsOfType(StorageItemTypes.File))
+                {
+                    StorageFile storageFile = (StorageFile)storageItem;
+
+                    // JSON encoded object value.
+                    string content = await FileIO.ReadTextAsync(storageFile);
+
+                    // The first data value.
+                    if (JsonSerializer.Deserialize<PageSaveData>(content) is not PageSaveData saveData)
+                    {
+                        SuperFrame.Navigate(typeof(Views.BalanceSheet));
+                        return;
+                    }
+
+                    // The navigating page type.
+                    if (Type.GetType(saveData.PageType) is not Type pageType)
+                    {
+                        SuperFrame.Navigate(typeof(Views.BalanceSheet));
+                        return;
+                    }
+
+                    // The parameter type's full name.
+                    if (saveData.ParamType is not string paramType)
+                    {
+                        SuperFrame.Navigate(pageType);
+                        return;
+                    }
+
+                    // The parameter's type.
+                    if (Type.GetType(paramType) is not Type pageParamType)
+                    {
+                        SuperFrame.Navigate(pageType);
+                        return;
+                    }
+
+                    // Navigate to the cached page.
+                    if (JsonSerializer.Deserialize(content, typeof(PageSaveData<>).MakeGenericType(pageParamType)) is not object completeContent)
+                    {
+                        Debug.Fail("Deserialization failed.");
+                        SuperFrame.Navigate(pageType);
+                        return;
+                    }
+
+                    // The parameter information.
+                    if (completeContent.GetType().GetProperty("Parameters") is not PropertyInfo paramInfo)
+                    {
+                        Debug.Fail("\"Parameters\" not found.");
+                        SuperFrame.Navigate(pageType);
+                        return;
+                    }
+
+                    object? parameters = paramInfo.GetValue(completeContent);
+
+                    if (parameters != null)
+                    {
+                        Debug.WriteLine("Successfully loaded");
+                        SuperFrame.Navigate(pageType, parameters);
+                        return;
+                    }
+
+                    Debug.Fail(paramType);
+                    SuperFrame.Navigate(pageType);
+                }
+            }
         }
     }
 }
