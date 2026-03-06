@@ -55,6 +55,7 @@ namespace Yamashina.Views
             SaveButton.PointerEntered += SaveButton_PointerEntered;
             MethodComboBox.PointerEntered += SuperComboBox_PointerEntered;
             SuperSearchBox.PointerEntered += SuperSearchBox_PointerEntered;
+            SuperListView.PointerEntered += SuperListView_PointerEntered;
 
             AddButton.PointerExited += PointerExitedAction;
             RemoveButton.PointerExited += PointerExitedAction;
@@ -65,8 +66,17 @@ namespace Yamashina.Views
             SaveButton.PointerExited += PointerExitedAction;
             MethodComboBox.PointerExited += PointerExitedAction;
             SuperSearchBox.PointerExited += PointerExitedAction;
+            SuperListView.PointerExited += PointerExitedAction;
 
             MethodComboBox.SelectionChanged += SuperComboBox_SelectionChanged;
+        }
+
+        private void SuperListView_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] is not true)
+                return;
+
+            PlayMedia(new("ms-appx:///Assets/Voices/ItemDesc.wav"));
         }
 
         private async void SuperComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -172,6 +182,8 @@ namespace Yamashina.Views
         {
             if (ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] is not true)
                 return;
+
+            StopPlay();
 
             SpeechSynthesizer synth = new SpeechSynthesizer();
 

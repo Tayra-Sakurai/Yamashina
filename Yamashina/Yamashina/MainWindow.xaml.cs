@@ -149,7 +149,7 @@ namespace Yamashina
             {
                 StorageFolder localCache = ApplicationData.Current.LocalCacheFolder;
                 IStorageItem? storageItem = await localCache.TryGetItemAsync("cachedpage.json");
-                if (storageItem.IsOfType(StorageItemTypes.File))
+                if (storageItem?.IsOfType(StorageItemTypes.File) is true)
                 {
                     StorageFile storageFile = (StorageFile)storageItem;
 
@@ -211,7 +211,11 @@ namespace Yamashina
 
                     Debug.Fail(paramType);
                     SuperFrame.Navigate(pageType);
+
+                    return;
                 }
+
+                SuperFrame.Navigate(typeof(Views.BalanceSheet));
             }
         }
     }

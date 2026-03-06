@@ -158,6 +158,7 @@
     <Content Include="Assets\Voices\en-GB\filterDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Voices\en-GB\ItemDesc.wav" />
     <Content Include="Assets\Voices\en-GB\removeDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
@@ -188,6 +189,7 @@
     <Content Include="Assets\Voices\en-US\filterDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Voices\en-US\ItemDesc.wav" />
     <Content Include="Assets\Voices\en-US\removeDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
@@ -218,6 +220,7 @@
     <Content Include="Assets\Voices\en\filterDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Voices\en\ItemDesc.wav" />
     <Content Include="Assets\Voices\en\removeDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
@@ -239,6 +242,7 @@
     <Content Include="Assets\Voices\ja-JP\ComboBoxDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Voices\ja-JP\ItemDesc.wav" />
     <Content Include="Assets\Voices\ja-JP\removeDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>

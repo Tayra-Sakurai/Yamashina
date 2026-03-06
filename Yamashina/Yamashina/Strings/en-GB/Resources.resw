@@ -237,6 +237,12 @@
   <data name="Rev.Label" xml:space="preserve">
     <value>Return</value>
   </data>
+  <data name="SoundElementSetting.Description" xml:space="preserve">
+    <value>Activates or deactivates the sounds of controls.</value>
+  </data>
+  <data name="SoundElementSetting.Header" xml:space="preserve">
+    <value>Sounds of Controls</value>
+  </data>
   <data name="Srch.Label" xml:space="preserve">
     <value>Search</value>
   </data>

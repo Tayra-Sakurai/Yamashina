@@ -35,6 +35,17 @@ namespace Yamashina.Views
             InitializeComponent();
 
             VoiceSettingSwitch.Toggled += VoiceSettingSwitch_Toggled;
+            ElementSounds.Toggled += ElementSounds_Toggled;
+        }
+
+        private void ElementSounds_Toggled(object sender, RoutedEventArgs e)
+        {
+            ApplicationData.Current.LocalSettings.Values["SoundsOfElements"] = ElementSounds.IsOn;
+
+            if (ElementSounds.IsOn)
+                ElementSoundPlayer.State = ElementSoundPlayerState.On;
+            else
+                ElementSoundPlayer.State = ElementSoundPlayerState.Off;
         }
 
         private void VoiceSettingSwitch_Toggled(object sender, RoutedEventArgs e)
@@ -51,7 +62,11 @@ namespace Yamashina.Views
             if (settings.Values["VoiceGuideEnabled"] is null)
                 settings.Values["VoiceGuideEnabled"] = true;
 
-            VoiceSettingSwitch.IsOn = (bool)settings.Values["VoiceGuideEnabled"];
+            if (settings.Values["SoundsOfElements"] is null)
+                settings.Values["SoundsOfElements"] = true;
+
+            VoiceSettingSwitch.IsOn = (settings.Values["VoiceGuideEnabled"] as bool?) ?? true;
+            ElementSounds.IsOn = (settings.Values["SoundsOfElements"] as bool?) ?? true;
         }
     }
 }

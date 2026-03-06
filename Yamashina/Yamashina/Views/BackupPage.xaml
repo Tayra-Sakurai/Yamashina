@@ -30,6 +30,10 @@
                                        HeaderIcon="{ui:FontIcon Glyph=&#xE767;}">
                     <ToggleSwitch x:Name="VoiceSettingSwitch"/>
                 </controls:SettingsCard>
+                <controls:SettingsCard x:Uid="SoundElementSetting"
+                                       HeaderIcon="{ui:FontIcon Glyph=&#xe767;}">
+                    <ToggleSwitch x:Name="ElementSounds"/>
+                </controls:SettingsCard>
                 <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                         CornerRadius="{ThemeResource ControlCornerRadius}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"

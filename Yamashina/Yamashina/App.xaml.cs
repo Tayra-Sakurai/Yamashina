@@ -85,7 +85,15 @@ namespace Yamashina
             {
                 ApplicationData.Current.LocalSettings.Values["IsInitialized"] = true;
                 ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] = true;
+                ApplicationData.Current.LocalSettings.Values["SoundsOfElements"] = true;
             }
+            else if (ApplicationData.Current.LocalSettings.Values["SoundsOfElements"] is null)
+                ApplicationData.Current.LocalSettings.Values["SoundsOfElements"] = true;
+
+            if (ApplicationData.Current.LocalSettings.Values["SoundsOfElements"] is not false)
+                ElementSoundPlayer.State = ElementSoundPlayerState.On;
+            else
+                ElementSoundPlayer.State = ElementSoundPlayerState.Off;
 
             _window = new MainWindow();
             if (AppWindowTitleBar.IsCustomizationSupported())

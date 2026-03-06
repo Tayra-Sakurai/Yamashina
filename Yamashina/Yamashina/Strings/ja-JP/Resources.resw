@@ -277,6 +277,14 @@
     <value>戻る</value>
     <comment>return button.</comment>
   </data>
+  <data name="SoundElementSetting.Description" xml:space="preserve">
+    <value>要素の操作音を有効化・無効化します．</value>
+    <comment>descriptions of the card.</comment>
+  </data>
+  <data name="SoundElementSetting.Header" xml:space="preserve">
+    <value>要素の音</value>
+    <comment>Sounds of elements.</comment>
+  </data>
   <data name="Srch.Label" xml:space="preserve">
     <value>検索</value>
     <comment>Record search button label.</comment>
