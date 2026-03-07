@@ -36,6 +36,9 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -49,7 +52,8 @@
                    Style="{StaticResource BodyTextBlockStyle}"/>
         <ListView x:Name="SuperListView"
                   ItemsSource="{x:Bind viewModel.BalanceSheets, Mode=OneWay}"
-                  Grid.Row="2" Grid.ColumnSpan="3">
+                  Grid.Row="2" Grid.ColumnSpan="3"
+                  IsItemClickEnabled="True">
             <ListView.Header>
                 <Border Padding="12,4,0,4"
                         Background="{ThemeResource SolidBackgroundFillColorBaseBrush}">
@@ -92,18 +96,37 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
+        <MediaPlayerElement Source="ms-appx:///Assets/Voices/StatsDesc.wav"
+                            Grid.Row="3"
+                            Grid.ColumnSpan="3"
+                            AreTransportControlsEnabled="True"
+                            HorizontalAlignment="Stretch"
+                            AutoPlay="False">
+            <MediaPlayerElement.TransportControls>
+                <MediaTransportControls IsCompact="True"/>
+            </MediaPlayerElement.TransportControls>
+        </MediaPlayerElement>
         <DatePicker DayVisible="False" Date="{x:Bind viewModel.Month, Mode=TwoWay}"
-                    x:Uid="MonthPicker" Grid.Row="3"/>
-        <ComboBox x:Uid="Method" Grid.Row="3" Grid.Column="1"
+                    x:Uid="MonthPicker" Grid.Row="4"
+                    x:Name="SuperMonthPicker"/>
+        <ComboBox x:Uid="Method" Grid.Row="4" Grid.Column="1"
                   ItemsSource="{x:Bind viewModel.Methods, Mode=OneWay, Converter={StaticResource MethodsConverter}}"
-                  SelectedItem="{x:Bind viewModel.Method, Mode=TwoWay, Converter={StaticResource MethodConverter}}"/>
+                  SelectedItem="{x:Bind viewModel.Method, Mode=TwoWay, Converter={StaticResource MethodConverter}}"
+                  x:Name="MyComboBox"/>
         <CommandBar DefaultLabelPosition="Right"
-                    Grid.Row="4" Grid.ColumnSpan="3">
+                    Grid.Row="5" Grid.ColumnSpan="3">
             <AppBarButton x:Uid="Dtl" Command="{StaticResource SuperCommand}"
                           x:Name="SuperCommandButton"
                           CommandParameter="{Binding SelectedItem, ElementName=SuperListView}"/>
             <AppBarButton x:Uid="Sync" Command="{x:Bind viewModel.LoadCommand}"
-                          Icon="Sync"/>
+                          Icon="Sync"
+                          x:Name="SuperSync"/>
         </CommandBar>
+        <TextBlock x:Uid="VoiceCredit" Style="{StaticResource BodyTextBlockStyle}" Grid.Row="6" Grid.ColumnSpan="3"/>
+        <MediaPlayerElement AreTransportControlsEnabled="False"
+                            AutoPlay="False"
+                            Grid.Row="7" Grid.ColumnSpan="3"
+                            HorizontalAlignment="Stretch"
+                            x:Name="SuperMediaPlayerElement"/>
     </Grid>
 </Page>

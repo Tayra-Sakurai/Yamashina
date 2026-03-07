@@ -146,6 +146,7 @@
     <Content Include="Assets\Voices\en-GB\addDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Voices\en-GB\ApplyFilterDesc.wav" />
     <Content Include="Assets\Voices\en-GB\ComboBoxDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
@@ -159,6 +160,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Voices\en-GB\ItemDesc.wav" />
+    <Content Include="Assets\Voices\en-GB\MonthDesc.wav" />
     <Content Include="Assets\Voices\en-GB\removeDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
@@ -171,12 +173,14 @@
     <Content Include="Assets\Voices\en-GB\searchDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Voices\en-GB\StatsDesc.wav" />
     <Content Include="Assets\Voices\en-GB\syncDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Voices\en-US\addDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Voices\en-US\ApplyFilterDesc.wav" />
     <Content Include="Assets\Voices\en-US\ComboBoxDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
@@ -190,6 +194,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Voices\en-US\ItemDesc.wav" />
+    <Content Include="Assets\Voices\en-US\MonthDesc.wav" />
     <Content Include="Assets\Voices\en-US\removeDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
@@ -202,12 +207,14 @@
     <Content Include="Assets\Voices\en-US\searchDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Voices\en-US\StatsDesc.wav" />
     <Content Include="Assets\Voices\en-US\syncDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Voices\en\addDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Voices\en\ApplyFilterDesc.wav" />
     <Content Include="Assets\Voices\en\ComboBoxDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
@@ -221,6 +228,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Voices\en\ItemDesc.wav" />
+    <Content Include="Assets\Voices\en\MonthDesc.wav" />
     <Content Include="Assets\Voices\en\removeDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
@@ -233,16 +241,19 @@
     <Content Include="Assets\Voices\en\searchDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Voices\en\StatsDesc.wav" />
     <Content Include="Assets\Voices\en\syncDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Voices\ja-JP\addDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Voices\ja-JP\ApplyFilterDesc.wav" />
     <Content Include="Assets\Voices\ja-JP\ComboBoxDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Voices\ja-JP\ItemDesc.wav" />
+    <Content Include="Assets\Voices\ja-JP\MonthDesc.wav" />
     <Content Include="Assets\Voices\ja-JP\removeDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
@@ -258,6 +269,7 @@
     <Content Include="Assets\Voices\ja-JP\searchBoxDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Voices\ja-JP\StatsDesc.wav" />
     <Content Include="Assets\Voices\ja-JP\syncDesc.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
