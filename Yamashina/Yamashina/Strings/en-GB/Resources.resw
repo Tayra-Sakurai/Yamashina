@@ -231,6 +231,9 @@
   <data name="MtdCol.Content" xml:space="preserve">
     <value>Method</value>
   </data>
+  <data name="OriginalLicenceText1.Text" xml:space="preserve">
+    <value>is licenced under the terms of licence on </value>
+  </data>
   <data name="Q.Header" xml:space="preserve">
     <value>Search for...</value>
   </data>
@@ -266,5 +269,8 @@
   </data>
   <data name="VoiceSettingCard.Header" xml:space="preserve">
     <value>Enable Voice Guide</value>
+  </data>
+  <data name="OriginalLicenceText2.Text" xml:space="preserve">
+    <value>.</value>
   </data>
 </root>

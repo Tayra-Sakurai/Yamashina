@@ -128,6 +128,8 @@
     <Content Include="Assets\Images\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Images\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Images\Wide310x150Logo.scale-400.png" />
+    <Content Include="Assets\Images\Zunkyo.scale-300.png" />
+    <Content Include="Assets\Images\Zunkyo.scale-100.png" />
     <Content Include="Assets\SSMLTemplates\en-GB\Template_Method.ssml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>

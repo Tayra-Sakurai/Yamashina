@@ -270,6 +270,50 @@
                             </Hyperlink>
                             <Run x:Uid="MITNotice3"/>
                         </TextBlock>
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}">
+                            VOICEVOX
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            Copyright © Hiroshiba Kazuyuki
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            VOICEVOX
+                            <Run x:Uid="OriginalLicenceText1"/>
+                            <Hyperlink NavigateUri="https://voicevox.hiroshiba.jp/term/">https://voicevox.hiroshiba.jp/term/</Hyperlink>
+                            <Run x:Uid="OriginalLicenceText2"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            VOICEVOX 雨晴はう
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            Copyright © 2025 Amehare Project
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            雨晴はう
+                            <Run x:Uid="OriginalLicenceText1"/>
+                            <Hyperlink NavigateUri="https://amehau.com/rules/amehare-hau-rule">https://amehau.com/rules/amehare-hau-rule</Hyperlink>
+                            <Run x:Uid="OriginalLicenceText2"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            VOICEVOX 四国めたん
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                   TextWrapping="WrapWholeWords">
+                            Copyright © 2026 SSS All rights reserved.
+                        </TextBlock>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="4*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="ms-appx:///Assets/Images/Zunkyo.png"/>
+                        </Grid>
                     </StackPanel>
                 </Border>
             </StackPanel>

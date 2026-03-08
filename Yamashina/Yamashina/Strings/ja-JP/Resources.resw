@@ -269,6 +269,10 @@
     <value>手段</value>
     <comment>Payment method column.</comment>
   </data>
+  <data name="OriginalLicenceText1.Text" xml:space="preserve">
+    <value>のライセンス条項は</value>
+    <comment>Original licence notice text between the title and the hyper link.</comment>
+  </data>
   <data name="Q.Header" xml:space="preserve">
     <value>検索</value>
     <comment>Search input header.</comment>
@@ -316,5 +320,9 @@
   <data name="VoiceSettingCard.Header" xml:space="preserve">
     <value>音声ガイドを有効にする．</value>
     <comment>Enabling voice guide.</comment>
+  </data>
+  <data name="OriginalLicenceText2.Text" xml:space="preserve">
+    <value>に掲載されています．</value>
+    <comment>The last part of the original licence notice.</comment>
   </data>
 </root>
