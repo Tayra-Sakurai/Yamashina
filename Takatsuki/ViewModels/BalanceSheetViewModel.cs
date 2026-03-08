@@ -18,7 +18,7 @@ namespace Takatsuki.ViewModels
 {
     public partial class BalanceSheetViewModel : ObservableObject
     {
-        private TakatsukiContext context;
+        private readonly TakatsukiContext context;
         private BalanceSheet model;
 
         public BalanceSheet Model
@@ -59,7 +59,7 @@ namespace Takatsuki.ViewModels
         public PaymentMethod Method
         {
             get => model.Method;
-            set => SetProperty(model.Method, value, model, (m, v) => m.Method = v);
+            set => SetProperty(model.Method, context.PaymentMethods.Find(value.Id), model, (m, v) => m.Method = v);
         }
 
         public string Item
@@ -81,8 +81,7 @@ namespace Takatsuki.ViewModels
         {
             get
             {
-                context.PaymentMethods.Load();
-                return context.PaymentMethods.Local.ToObservableCollection();
+                return [.. context.PaymentMethods.ToList()];
             }
         }
 
@@ -119,10 +118,6 @@ namespace Takatsuki.ViewModels
         [RelayCommand]
         public async Task SaveAsync()
         {
-            await context.SaveChangesAsync();
-            context = new();
-            if (context.Entry(model).State == EntityState.Detached)
-                context.Update(model);
             await context.SaveChangesAsync();
         }
     }

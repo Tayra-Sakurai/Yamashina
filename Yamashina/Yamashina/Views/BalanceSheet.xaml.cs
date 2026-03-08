@@ -237,7 +237,7 @@ namespace Yamashina.Views
                 catch (COMException comException)
                 {
                     Debug.WriteLine("COMException: " + comException.Message);
-                    throw new COMException(comException.Message, comException);
+                    return;
                 }
                 catch (Exception ex)
                 {
