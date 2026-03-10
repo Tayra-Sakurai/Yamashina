@@ -273,4 +273,16 @@
   <data name="OriginalLicenceText2.Text" xml:space="preserve">
     <value>.</value>
   </data>
+  <data name="MakeBackup.Header" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="MakeBackupDesc.Text" xml:space="preserve">
+    <value>Makes a backup of the database (file size:</value>
+  </data>
+  <data name="BackupMake.Content" xml:space="preserve">
+    <value>Make</value>
+  </data>
+  <data name="MakeBackupDesc2.Text" xml:space="preserve">
+    <value>KB).</value>
+  </data>
 </root>

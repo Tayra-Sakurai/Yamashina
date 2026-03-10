@@ -325,4 +325,20 @@
     <value>に掲載されています．</value>
     <comment>The last part of the original licence notice.</comment>
   </data>
+  <data name="MakeBackup.Header" xml:space="preserve">
+    <value>バックアップ</value>
+    <comment>Backup card title.</comment>
+  </data>
+  <data name="MakeBackupDesc.Text" xml:space="preserve">
+    <value>データベースのバックアップを作成します．(ファイルサイズ:</value>
+    <comment>Making backup description.</comment>
+  </data>
+  <data name="BackupMake.Content" xml:space="preserve">
+    <value>バックアップを作成．</value>
+    <comment>making backup button.</comment>
+  </data>
+  <data name="MakeBackupDesc2.Text" xml:space="preserve">
+    <value>KB).</value>
+    <comment>The last of sentence.</comment>
+  </data>
 </root>

@@ -5,6 +5,7 @@ using Google.GenAI;
 using Higashiyama.Services;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -38,6 +39,7 @@ namespace Yamashina
     public partial class App : Application
     {
         private Window? _window;
+        public WindowId? WindowId { get; private set; }
 
         public IServiceProvider Service { get; }
 
@@ -66,6 +68,7 @@ namespace Yamashina
             services.AddSingleton<ISearchService>(x =>
                 ActivatorUtilities.CreateInstance<SearchService>(x));
 
+            services.AddTransient<BackupViewModel>();
             services.AddTransient<BalanceSheetViewModel>();
             services.AddTransient<EntitiesViewModel>();
             services.AddTransient<PaymentMethodsViewModel>();
@@ -103,6 +106,7 @@ namespace Yamashina
                 string iconFileName = "Assets/Imeges/Icon.ico";
                 appWindow.SetIcon(System.IO.Path.Combine(path, iconFileName));
             }
+            WindowId = _window.AppWindow.Id;
             _window.Activate();
         }
 

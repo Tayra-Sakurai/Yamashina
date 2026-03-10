@@ -10,6 +10,11 @@
     xmlns:ui="using:CommunityToolkit.WinUI"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <XamlUICommand x:Name="BackupMakeCommand"
+                       x:Key="BackupMakeCommand"/>
+    </Page.Resources>
+
     <Grid Padding="12,16"
           Background="{ThemeResource SolidBackgroundFillColorBaseBrush}">
         <Grid.RowDefinitions>
@@ -33,6 +38,20 @@
                 <controls:SettingsCard x:Uid="SoundElementSetting"
                                        HeaderIcon="{ui:FontIcon Glyph=&#xe767;}">
                     <ToggleSwitch x:Name="ElementSounds"/>
+                </controls:SettingsCard>
+                <controls:SettingsCard x:Uid="MakeBackup"
+                                       HeaderIcon="{ui:FontIcon Glyph=&#xe898;}">
+                    <controls:SettingsCard.Description>
+                        <TextBlock Style="{StaticResource CaptionTextBlockStyle}"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}">
+                            <Run x:Uid="MakeBackupDesc"/>
+                            <Run Text="{x:Bind backupViewModel.FileSize}"/>
+                            <Run x:Uid="MakeBackupDesc2"/>
+                        </TextBlock>
+                    </controls:SettingsCard.Description>
+                    <controls:SettingsCard.Content>
+                        <Button x:Uid="BackupMake" Style="{StaticResource AccentButtonStyle}" Command="{StaticResource BackupMakeCommand}"/>
+                    </controls:SettingsCard.Content>
                 </controls:SettingsCard>
                 <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                         CornerRadius="{ThemeResource ControlCornerRadius}"
