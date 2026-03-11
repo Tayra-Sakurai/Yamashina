@@ -218,19 +218,19 @@
     <comment>Item Name.</comment>
   </data>
   <data name="LicenceGPL1.Text" xml:space="preserve">
-    <value>このソフトウェアはフリーソフトであり, Free Software Foundationが発行するGNU一般公衆ライセンス(バージョン3.0およびそれ以降のバージョン)の規定のもとで自由に再配布および改変することができます．</value>
+    <value>このソフトウェアはフリーソフトであり, Free Software Foundationが発行するGNUアファロー一般公衆ライセンス(バージョン3.0およびそれ以降のバージョン)の規定のもとで自由に再配布および改変することができます．</value>
     <comment>The first paragraph of the GPL Notice.</comment>
   </data>
   <data name="LicenceGPL2.Text" xml:space="preserve">
-    <value>このソフトウェアは利用者に有益であることを望んで配布されていますが一切の保証はありません．暗示的な有益性や特定目的への適合性の保証さえありません．詳細については, GNU一般公衆ライセンスをご確認ください．</value>
+    <value>このソフトウェアは利用者に有益であることを望んで配布されていますが一切の保証はありません．暗示的な有益性や特定目的への適合性の保証さえありません．詳細については, GNUアファロー一般公衆ライセンスをご確認ください．</value>
     <comment>The second paragraph of the license notice.</comment>
   </data>
   <data name="LicenceGPL3.Text" xml:space="preserve">
-    <value>あなたはGNU一般公衆ライセンスのコピーをこのプログラムに付随して入手しているはずです．もしそうでなければ, </value>
+    <value>あなたはGNUアファロー一般公衆ライセンスのコピーをこのプログラムに付随して入手しているはずです．もしそうでなければ, </value>
     <comment>The third paragraph of the license notice without the hyperlink.</comment>
   </data>
   <data name="LicenceGPL4.Text" xml:space="preserve">
-    <value>https://www.gnu.org/licenses/gpl.html</value>
+    <value>https://www.gnu.org/licenses/agpl.html</value>
     <comment>The hyperlink text of the license notice.</comment>
   </data>
   <data name="LicenceGPL5.Text" xml:space="preserve">

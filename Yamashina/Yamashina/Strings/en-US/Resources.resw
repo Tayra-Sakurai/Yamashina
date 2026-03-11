@@ -193,16 +193,16 @@
     <value>Item Name</value>
   </data>
   <data name="LicenceGPL1.Text" xml:space="preserve">
-    <value>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</value>
+    <value>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</value>
   </data>
   <data name="LicenceGPL2.Text" xml:space="preserve">
-    <value>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</value>
+    <value>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.</value>
   </data>
   <data name="LicenceGPL3.Text" xml:space="preserve">
-    <value>You should have received a copy of the GNU General Public License along with this program. If not, see </value>
+    <value>You should have received a copy of the GNU Affero General Public License along with this program. If not, see </value>
   </data>
   <data name="LicenceGPL4.Text" xml:space="preserve">
-    <value>https://www.gnu.org/licenses/gpl.html</value>
+    <value>https://www.gnu.org/licenses/agpl.html</value>
   </data>
   <data name="LicenceGPL5.Text" xml:space="preserve">
     <value>.</value>
