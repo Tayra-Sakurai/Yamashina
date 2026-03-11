@@ -11,11 +11,12 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Takatsuki.Contexts;
 using Takatsuki.Models;
 using Windows.ApplicationModel.Resources;
@@ -31,19 +32,33 @@ namespace Yamashina
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        private readonly List<Type> pages;
-        private Type? currentPage = null;
+        private ObservableCollection<PageSaveData> pages;
+        private bool isBacked = false;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            pages = [typeof(Views.BalanceSheet)];
+            pages = [];
 
             Activated += MainWindow_Activated;
             SuperFrame.Navigating += SuperFrame_Navigated;
             SuperNavigation.BackRequested += SuperNavigation_BackRequested;
             SuperNavigation.ItemInvoked += SuperNavigation_ItemInvoked;
+            pages.CollectionChanged += Pages_CollectionChanged;
+        }
+
+        private async void Pages_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            List<PageSaveData> data = pages.ToList();
+            IStorageItem item = await ApplicationData.Current.LocalCacheFolder.TryGetItemAsync("chachedpages.json");
+            if (item == null)
+                await ApplicationData.Current.LocalCacheFolder.CreateFileAsync("cachedpages.json");
+            else if (item.IsOfType(StorageItemTypes.Folder))
+                return;
+            StorageFile file = await ApplicationData.Current.LocalCacheFolder.GetFileAsync("cachedpages.json");
+            string writingContent = JsonSerializer.Serialize(data);
+            await FileIO.WriteTextAsync(file, writingContent);
         }
 
         private void SuperNavigation_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -62,161 +77,83 @@ namespace Yamashina
 
         private void SuperNavigation_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
-            if (pages.Count > 0)
+            pages.RemoveAt(pages.Count - 1);
+            PageSaveData? pageSaveData = pages.LastOrDefault();
+            if (pageSaveData != null)
             {
-                Type pageType = pages.Last();
-                SuperFrame.Navigate(pageType, null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
-                pages.RemoveAt(pages.Count - 1);
-                if (pageType == typeof(Views.PaymentMethods))
-                    CurrentBalanceItem.IsSelected = true;
-                else if (pageType == typeof(Views.BalanceSheet))
-                    BalanceSheetItem.IsSelected = true;
-                else if (pageType == typeof(Views.BackupPage))
-                    sender.SelectedItem = sender.SettingsItem;
-                else if (pageType == typeof(Views.MonthlyStat))
-                    MonthlyPageItem.IsSelected = true;
+                Type? pType = Type.GetType(pageSaveData.PageType);
+                if (pType != null)
+                {
+                    isBacked = true;
+                    SuperFrame.Navigate(
+                        pType,
+                        pageSaveData.Parameters,
+                        new SlideNavigationTransitionInfo
+                        {
+                            Effect = SlideNavigationTransitionEffect.FromLeft,
+                        });
+                    return;
+                }
             }
+            SuperNavigation.IsBackEnabled = false;
+            return;
+        }
+
+        private void SuperFrame_Navigated(object sender, NavigatingCancelEventArgs e)
+        {
+            if (isBacked)
+            {
+                isBacked = false;
+                return;
+            }
+            PageSaveData pageSaveData = new()
+            {
+                PageType = e.SourcePageType.AssemblyQualifiedName ?? throw new InvalidOperationException("No page has been found."),
+                ParamType = e.Parameter.GetType().AssemblyQualifiedName,
+                Parameters = e.Parameter,
+            };
+            pages.Add(pageSaveData);
+            if (pages.Count > 2)
+                SuperNavigation.IsBackEnabled = true;
             else
                 SuperNavigation.IsBackEnabled = false;
         }
 
-        private async void SuperFrame_Navigated(object sender, NavigatingCancelEventArgs e)
-        {
-            if (currentPage != null)
-            {
-                pages.Add(currentPage);
-                if (!SuperNavigation.IsBackEnabled)
-                    SuperNavigation.IsBackEnabled = true;
-            }
-            currentPage = e.SourcePageType;
-
-            string? pageType = e.SourcePageType.AssemblyQualifiedName;
-            object? param = e.Parameter;
-            string? paramType = null;
-
-            if (pageType == null)
-                return;
-
-            if (param is BalanceSheet p)
-            {
-                paramType = typeof(BalanceSheet).AssemblyQualifiedName;
-                using (TakatsukiContext context = new())
-                {
-                    param = context.BalanceSheet.Find(p.Id);
-                }
-            }
-            else if (param is PaymentMethod p1)
-            {
-                paramType = typeof(PaymentMethod).AssemblyQualifiedName;
-                using (TakatsukiContext ctx = new())
-                {
-                    param = ctx.PaymentMethods.Find(p1.Id);
-                }
-            }
-            else if (param is not null)
-            {
-                paramType = param.GetType().AssemblyQualifiedName;
-            }
-
-            PageSaveData pageSaveData = new PageSaveData
-            {
-                PageType = pageType,
-                Parameters = param,
-                ParamType = paramType,
-            };
-
-            IStorageItem? item = await ApplicationData.Current.LocalCacheFolder.TryGetItemAsync("cachedpage.json");
-
-            if (item != null)
-            {
-                if (item.IsOfType(StorageItemTypes.File))
-                {
-                    StorageFile file = (StorageFile)item;
-
-                    await FileIO.WriteTextAsync(file, JsonSerializer.Serialize(pageSaveData));
-                }
-
-                return;
-            }
-
-            StorageFile storageFile = await ApplicationData.Current.LocalCacheFolder.CreateFileAsync("cachedpage.json");
-            await FileIO.WriteTextAsync(storageFile, JsonSerializer.Serialize(pageSaveData));
-        }
-
         private async void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
         {
-            if (SuperFrame.Content == null)
+            if (SuperFrame.SourcePageType == null)
             {
-                StorageFolder localCache = ApplicationData.Current.LocalCacheFolder;
-                IStorageItem? storageItem = await localCache.TryGetItemAsync("cachedpage.json");
-                if (storageItem?.IsOfType(StorageItemTypes.File) is true)
+                List<PageSaveData>? data = await LoadJsonDataAsync();
+                if (data == null || data.Count == 0)
                 {
-                    StorageFile storageFile = (StorageFile)storageItem;
-
-                    // JSON encoded object value.
-                    string content = await FileIO.ReadTextAsync(storageFile);
-
-                    // The first data value.
-                    if (JsonSerializer.Deserialize<PageSaveData>(content) is not PageSaveData saveData)
-                    {
-                        SuperFrame.Navigate(typeof(Views.BalanceSheet));
-                        return;
-                    }
-
-                    // The navigating page type.
-                    if (Type.GetType(saveData.PageType) is not Type pageType)
-                    {
-                        SuperFrame.Navigate(typeof(Views.BalanceSheet));
-                        return;
-                    }
-
-                    // The parameter type's full name.
-                    if (saveData.ParamType is not string paramType)
-                    {
-                        SuperFrame.Navigate(pageType);
-                        return;
-                    }
-
-                    // The parameter's type.
-                    if (Type.GetType(paramType) is not Type pageParamType)
-                    {
-                        SuperFrame.Navigate(pageType);
-                        return;
-                    }
-
-                    // Navigate to the cached page.
-                    if (JsonSerializer.Deserialize(content, typeof(PageSaveData<>).MakeGenericType(pageParamType)) is not object completeContent)
-                    {
-                        Debug.Fail("Deserialization failed.");
-                        SuperFrame.Navigate(pageType);
-                        return;
-                    }
-
-                    // The parameter information.
-                    if (completeContent.GetType().GetProperty("Parameters") is not PropertyInfo paramInfo)
-                    {
-                        Debug.Fail("\"Parameters\" not found.");
-                        SuperFrame.Navigate(pageType);
-                        return;
-                    }
-
-                    object? parameters = paramInfo.GetValue(completeContent);
-
-                    if (parameters != null)
-                    {
-                        Debug.WriteLine("Successfully loaded");
-                        SuperFrame.Navigate(pageType, parameters);
-                        return;
-                    }
-
-                    Debug.Fail(paramType);
-                    SuperFrame.Navigate(pageType);
-
+                    SuperFrame.Navigate(typeof(Views.BalanceSheet));
                     return;
                 }
-
-                SuperFrame.Navigate(typeof(Views.BalanceSheet));
+                PageSaveData data1 = data.Last();
+                Type? pageType = Type.GetType(data1.PageType);
+                if (pageType == null)
+                {
+                    SuperFrame.Navigate(typeof(Views.BalanceSheet));
+                    return;
+                }
+                SuperFrame.Navigate(pageType, data1.Parameters);
+                return;
             }
+        }
+
+        private async Task<List<PageSaveData>?> LoadJsonDataAsync()
+        {
+            IStorageItem? item = await ApplicationData.Current.LocalCacheFolder.TryGetItemAsync("cahchedpages.json");
+            if (item is null)
+                return null;
+            else if (item.IsOfType(StorageItemTypes.File))
+            {
+                StorageFile file = (StorageFile)item;
+                string jsonContent = await FileIO.ReadTextAsync(file);
+                List<PageSaveData>? data = JsonSerializer.Deserialize<List<PageSaveData>>(jsonContent);
+                return data;
+            }
+            return null;
         }
     }
 }

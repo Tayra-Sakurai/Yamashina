@@ -12,21 +12,28 @@ namespace Yamashina
 {
     internal class PageSaveData
     {
+        private object? parametersProperty;
         public string PageType { get; init; }
         public string? ParamType { get; init; }
-        public object? Parameters { get; init; }
-
-        public PageSaveData()
+        public object? Parameters
         {
-            PageType ??= nameof(BalanceSheet);
+            get
+            {
+                if (ParamType == null)
+                    return parametersProperty;
+                Type? paramType = Type.GetType(ParamType);
+                if (paramType == null) return parametersProperty;
+                try
+                {
+                    return Convert.ChangeType(parametersProperty, paramType);
+                }
+                catch (InvalidCastException)
+                {
+                    return parametersProperty;
+                }
+            }
+            init => parametersProperty = value;
         }
-    }
-
-    internal class PageSaveData<TParameter>
-    {
-        public string PageType { get; init; }
-        public string? ParamType { get; init; }
-        public required TParameter Parameters { get; init; }
 
         public PageSaveData()
         {
