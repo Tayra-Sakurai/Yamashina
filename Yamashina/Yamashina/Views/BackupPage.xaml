@@ -74,7 +74,7 @@
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                                    TextWrapping="WrapWholeWords">
                             <Run x:Uid="LicenceGPL3"/>
-                            <Hyperlink NavigateUri="https://www.gnu.org/licenses/gpl.html">
+                            <Hyperlink NavigateUri="https://www.gnu.org/licenses/agpl.html">
                                 <Run x:Uid="LicenceGPL4"/>
                             </Hyperlink>
                             <Run x:Uid="LicenceGPL5"/>
