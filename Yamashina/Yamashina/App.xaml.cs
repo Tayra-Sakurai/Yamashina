@@ -1,5 +1,5 @@
 ﻿// SPDX-FileCopyrightText: 2026 Tayra Sakurai
-// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Google.GenAI;
 using Higashiyama.Services;
@@ -63,7 +63,7 @@ namespace Yamashina
         {
             ServiceCollection services = new();
 
-            services.AddEmbeddingGenerator(new Client().AsIEmbeddingGenerator("gemini-embedding-001"));
+            services.AddEmbeddingGenerator(new Client().AsIEmbeddingGenerator("gemini-embedding-2-preview"));
 
             services.AddSingleton<ISearchService>(x =>
                 ActivatorUtilities.CreateInstance<SearchService>(x));
