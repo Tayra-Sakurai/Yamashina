@@ -18,7 +18,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Takatsuki.Contexts;
-using Takatsuki.Models;
 using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 
@@ -32,7 +31,7 @@ namespace Yamashina
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        private ObservableCollection<PageSaveData> pages;
+        private List<PageSaveData> pages;
         private bool isBacked = false;
 
         public MainWindow()
@@ -45,20 +44,24 @@ namespace Yamashina
             SuperFrame.Navigating += SuperFrame_Navigated;
             SuperNavigation.BackRequested += SuperNavigation_BackRequested;
             SuperNavigation.ItemInvoked += SuperNavigation_ItemInvoked;
-            pages.CollectionChanged += Pages_CollectionChanged;
+            Closed += MainWindow_Closed;
         }
 
-        private async void Pages_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private async void MainWindow_Closed(object sender, WindowEventArgs args)
         {
-            List<PageSaveData> data = pages.ToList();
-            IStorageItem item = await ApplicationData.Current.LocalCacheFolder.TryGetItemAsync("chachedpages.json");
-            if (item == null)
-                await ApplicationData.Current.LocalCacheFolder.CreateFileAsync("cachedpages.json");
-            else if (item.IsOfType(StorageItemTypes.Folder))
+            string jsonStr = JsonSerializer.Serialize(pages);
+            IStorageItem? storageItem = await ApplicationData.Current.LocalCacheFolder.TryGetItemAsync("cachedpages.json");
+            if (storageItem != null)
+            {
+                if (storageItem.IsOfType(StorageItemTypes.File))
+                {
+                    StorageFile file = (StorageFile)storageItem;
+                    await FileIO.WriteTextAsync(file, jsonStr);
+                }
                 return;
-            StorageFile file = await ApplicationData.Current.LocalCacheFolder.GetFileAsync("cachedpages.json");
-            string writingContent = JsonSerializer.Serialize(data);
-            await FileIO.WriteTextAsync(file, writingContent);
+            }
+            StorageFile storage = await ApplicationData.Current.LocalCacheFolder.CreateFileAsync("cachedpages.json");
+            await FileIO.WriteTextAsync(storage, jsonStr);
         }
 
         private void SuperNavigation_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -66,13 +69,13 @@ namespace Yamashina
             string item = (string)args.InvokedItem;
             ResourceLoader resourceLoader = new();
             if (item == resourceLoader.GetString("BS/Content"))
-                SuperFrame.Navigate(typeof(Views.BalanceSheet));
+                SuperFrame.Navigate(typeof(BalanceSheet));
             else if (item == resourceLoader.GetString("CB/Content"))
-                SuperFrame.Navigate(typeof(Views.PaymentMethods));
+                SuperFrame.Navigate(typeof(PaymentMethods));
             else if (args.IsSettingsInvoked)
-                SuperFrame.Navigate(typeof(Views.BackupPage));
+                SuperFrame.Navigate(typeof(BackupPage));
             else if (item == resourceLoader.GetString("Monthly/Content"))
-                SuperFrame.Navigate(typeof(Views.MonthlyStat));
+                SuperFrame.Navigate(typeof(MonthlyStat));
         }
 
         private void SuperNavigation_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
@@ -109,7 +112,7 @@ namespace Yamashina
             PageSaveData pageSaveData = new()
             {
                 PageType = e.SourcePageType.AssemblyQualifiedName ?? throw new InvalidOperationException("No page has been found."),
-                ParamType = e.Parameter.GetType().AssemblyQualifiedName,
+                ParamType = e.Parameter?.GetType()?.AssemblyQualifiedName,
                 Parameters = e.Parameter,
             };
             pages.Add(pageSaveData);
@@ -126,14 +129,15 @@ namespace Yamashina
                 List<PageSaveData>? data = await LoadJsonDataAsync();
                 if (data == null || data.Count == 0)
                 {
-                    SuperFrame.Navigate(typeof(Views.BalanceSheet));
+                    SuperFrame.Navigate(typeof(BalanceSheet));
                     return;
                 }
+                pages = data;
                 PageSaveData data1 = data.Last();
                 Type? pageType = Type.GetType(data1.PageType);
                 if (pageType == null)
                 {
-                    SuperFrame.Navigate(typeof(Views.BalanceSheet));
+                    SuperFrame.Navigate(typeof(BalanceSheet));
                     return;
                 }
                 SuperFrame.Navigate(pageType, data1.Parameters);
@@ -141,9 +145,9 @@ namespace Yamashina
             }
         }
 
-        private async Task<List<PageSaveData>?> LoadJsonDataAsync()
+        private static async Task<List<PageSaveData>?> LoadJsonDataAsync()
         {
-            IStorageItem? item = await ApplicationData.Current.LocalCacheFolder.TryGetItemAsync("cahchedpages.json");
+            IStorageItem? item = await ApplicationData.Current.LocalCacheFolder.TryGetItemAsync("cachedpages.json");
             if (item is null)
                 return null;
             else if (item.IsOfType(StorageItemTypes.File))

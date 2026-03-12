@@ -55,18 +55,6 @@
         <uap:SplashScreen Image="Assets\Images\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
-
-        <desktop:Extension Category="windows.toastNotificationActivation">
-          <desktop:ToastNotificationActivation ToastActivatorCLSID="DC7E8016-E6DC-41AD-BF62-32170B67905D"/>
-        </desktop:Extension>
-
-        <com:Extension Category="windows.comServer">
-          <com:ComServer>
-            <com:ExeServer Executable="Yamashina\Yamashina.exe" DisplayName="Yamashina" Arguments="--AppNotificationActivated:">
-              <com:Class Id="DC7E8016-E6DC-41AD-BF62-32170B67905D"/>
-            </com:ExeServer>
-          </com:ComServer>
-        </com:Extension>
       </Extensions>
     </Application>
   </Applications>

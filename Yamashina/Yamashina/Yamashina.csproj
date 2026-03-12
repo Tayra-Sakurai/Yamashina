@@ -8,17 +8,8 @@
     <Platforms>x86;x64;ARM64</Platforms>
     <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
     <UseWinUI>true</UseWinUI>
-    <WinUISDKReferences>false</WinUISDKReferences>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Views\BackupPage.xaml" />
-    <None Remove="Views\BalanceSheet.xaml" />
-    <None Remove="Views\DetailPage.xaml" />
-    <None Remove="Views\MonthlyStat.xaml" />
-    <None Remove="Views\PaymentDetail.xaml" />
-    <None Remove="Views\PaymentMethods.xaml" />
-  </ItemGroup>
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
@@ -41,57 +32,20 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260209005" />
     <PackageReference Include="System.Speech" Version="10.0.4" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Takatsuki\Takatsuki.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="Assets\Images\Icon.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Views\MonthlyStat.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Views\BackupPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Views\PaymentDetail.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Views\PaymentMethods.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Views\DetailPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Views\BalanceSheet.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-
+    <ItemGroup>
+        <ProjectReference Include="..\..\Higashiyama\Higashiyama.csproj" />
+        <ProjectReference Include="..\..\Takatsuki\Takatsuki.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Content Update="Assets\Images\Icon.ico">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
     <!-- Publish Properties -->
   <PropertyGroup>
     <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
-    <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
+    <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">true</PublishReadyToRun>
     <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
     <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">False</PublishTrimmed>
     <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
@@ -99,7 +53,7 @@
     <NeutralLanguage>ja-JP</NeutralLanguage>
     <ApplicationIcon>Assets\Images\Icon.ico</ApplicationIcon>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
-    <SignAssembly>True</SignAssembly>
+    <SignAssembly>False</SignAssembly>
     <Authors>Tayra Sakurai</Authors>
     <Copyright>Copyright (C) 2026 Tayra Sakurai</Copyright>
     <RepositoryUrl>https://github.com/Tayra-Sakurai/Yamashina</RepositoryUrl>
