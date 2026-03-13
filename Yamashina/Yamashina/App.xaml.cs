@@ -17,8 +17,10 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Takatsuki.ViewModels;
 using Windows.ApplicationModel;
@@ -82,16 +84,31 @@ namespace Yamashina
         /// Invoked when the application is launched.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected async override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            if (ApplicationData.Current.LocalSettings.Values["IsInitialized"] is not true)
+            if (ApplicationData.Current.LocalSettings.Values["IsInitialized2"] is not true)
             {
-                ApplicationData.Current.LocalSettings.Values["IsInitialized"] = true;
+                // Settiongs unchanged through versions.
+
+                ApplicationData.Current.LocalSettings.Values["IsInitialized2"] = true;
                 ApplicationData.Current.LocalSettings.Values["VoiceGuideEnabled"] = true;
                 ApplicationData.Current.LocalSettings.Values["SoundsOfElements"] = true;
             }
-            else if (ApplicationData.Current.LocalSettings.Values["SoundsOfElements"] is null)
-                ApplicationData.Current.LocalSettings.Values["SoundsOfElements"] = true;
+
+            if (ApplicationData.Current.Version < 1)
+            {
+                // Settings dependent on version
+
+                await ApplicationData.Current.SetVersionAsync(
+                    1,
+                    async handler =>
+                    {
+                        await ApplicationData.Current.LocalCacheFolder.CreateFileAsync(
+                            "cachedpages.json",
+                            CreationCollisionOption.ReplaceExisting);
+                    });
+                Debug.WriteLine(ApplicationData.Current.Version);
+            }
 
             if (ApplicationData.Current.LocalSettings.Values["SoundsOfElements"] is not false)
                 ElementSoundPlayer.State = ElementSoundPlayerState.On;

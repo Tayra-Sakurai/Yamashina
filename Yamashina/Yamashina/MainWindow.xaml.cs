@@ -154,6 +154,7 @@ namespace Yamashina
             {
                 StorageFile file = (StorageFile)item;
                 string jsonContent = await FileIO.ReadTextAsync(file);
+                if (string.IsNullOrEmpty(jsonContent)) return null;
                 List<PageSaveData>? data = JsonSerializer.Deserialize<List<PageSaveData>>(jsonContent);
                 return data;
             }
