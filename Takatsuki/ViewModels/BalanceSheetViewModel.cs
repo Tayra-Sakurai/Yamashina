@@ -111,7 +111,13 @@ namespace Takatsuki.ViewModels
             this.model = 
                 await context
                 .BalanceSheet
-                .FirstAsync(e => e.Id == model.Id);
+                .FindAsync(model.Id);
+            OnPropertyChanged();
+        }
+
+        public async Task InitializeForExistingValue(int id)
+        {
+            model = await context.BalanceSheet.FindAsync(id);
             OnPropertyChanged();
         }
 

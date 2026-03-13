@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Takatsuki.ViewModels;
 using Windows.Foundation;
@@ -43,9 +44,22 @@ namespace Yamashina
             base.OnNavigatedTo(e);
 
             if (viewModel != null)
-                if(e.Parameter is Takatsuki.Models.BalanceSheet balance)
-                    await viewModel.InitializeForExistingValue(balance);
-            Debug.WriteLine(viewModel?.Model?.ToString());
+            {
+                if (e.Parameter is Takatsuki.Models.BalanceSheet bs)
+                    await viewModel.InitializeForExistingValue(bs);
+                else if (e.Parameter is not null)
+                {
+                    PropertyInfo? propertyInfo = e.GetType().GetProperty("Id");
+                    if (propertyInfo is not null)
+                    {
+                        Type propertyType = propertyInfo.PropertyType;
+                        if (propertyType == typeof(int))
+                            await viewModel.InitializeForExistingValue((int)propertyInfo.GetValue(e.Parameter)!);
+                    }
+                }
+            }
+            Debug.WriteLine("This page is DetailPage.");
+            Debug.WriteLine(e.Parameter?.GetType().FullName);
         }
     }
 }

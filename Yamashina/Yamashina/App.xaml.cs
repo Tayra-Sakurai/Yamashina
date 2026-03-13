@@ -22,6 +22,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.Json;
 using Takatsuki.ViewModels;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -95,12 +96,12 @@ namespace Yamashina
                 ApplicationData.Current.LocalSettings.Values["SoundsOfElements"] = true;
             }
 
-            if (ApplicationData.Current.Version < 1)
+            if (ApplicationData.Current.Version < 2)
             {
                 // Settings dependent on version
 
                 await ApplicationData.Current.SetVersionAsync(
-                    1,
+                    2,
                     async handler =>
                     {
                         await ApplicationData.Current.LocalCacheFolder.CreateFileAsync(

@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Takatsuki.Contexts;
 using Windows.ApplicationModel.Resources;
@@ -33,12 +34,17 @@ namespace Yamashina
     {
         private List<PageSaveData> pages;
         private bool isBacked = false;
+        private JsonSerializerOptions options;
 
         public MainWindow()
         {
             InitializeComponent();
 
             pages = [];
+            options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles
+            };
 
             Activated += MainWindow_Activated;
             SuperFrame.Navigating += SuperFrame_Navigated;
@@ -49,7 +55,7 @@ namespace Yamashina
 
         private async void MainWindow_Closed(object sender, WindowEventArgs args)
         {
-            string jsonStr = JsonSerializer.Serialize(pages);
+            string jsonStr = JsonSerializer.Serialize(pages, options);
             IStorageItem? storageItem = await ApplicationData.Current.LocalCacheFolder.TryGetItemAsync("cachedpages.json");
             if (storageItem != null)
             {
