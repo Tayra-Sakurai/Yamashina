@@ -39,7 +39,7 @@
     
     <ItemGroup>
         <Content Update="Assets\Images\Icon.ico">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
     <!-- Publish Properties -->

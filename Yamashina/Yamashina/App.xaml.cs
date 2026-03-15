@@ -119,10 +119,8 @@ namespace Yamashina
             _window = new MainWindow();
             if (AppWindowTitleBar.IsCustomizationSupported())
             {
-                AppWindow appWindow = _window.AppWindow;
-                string path = AppContext.BaseDirectory;
-                string iconFileName = "Assets/Imeges/Icon.ico";
-                appWindow.SetIcon(System.IO.Path.Combine(path, iconFileName));
+                StorageFile iconFile = await StorageFile.GetFileFromApplicationUriAsync(new("ms-appx:///Assets/Images/Icon.ico"));
+                _window.AppWindow.SetIcon(iconFile.Path);
             }
             WindowId = _window.AppWindow.Id;
             _window.Activate();
