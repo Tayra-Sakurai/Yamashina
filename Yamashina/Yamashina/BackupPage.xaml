@@ -335,6 +335,13 @@
                         </Grid>
                     </StackPanel>
                 </Border>
+                <Border CornerRadius="{ThemeResource ControlCornerRadius}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                        BorderThickness="{ThemeResource ExpanderBorderThickness}"
+                        Padding="16">
+                    <RichEditBox IsReadOnly="True" x:Name="SuperLicenseBox"/>
+                </Border>
             </StackPanel>
         </ScrollViewer>
     </Grid>

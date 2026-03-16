@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Yamashina
@@ -24,6 +25,10 @@ namespace Yamashina
                 if (paramType == null) return parametersProperty;
                 try
                 {
+                    if (parametersProperty is JsonElement jsonElement)
+                    {
+                        return jsonElement.Deserialize(paramType);
+                    }
                     return Convert.ChangeType(parametersProperty, paramType);
                 }
                 catch (InvalidCastException)

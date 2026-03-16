@@ -22,6 +22,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 using System.Diagnostics;
+using Windows.Storage.Streams;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -103,6 +104,17 @@ namespace Yamashina
 
             VoiceSettingSwitch.IsOn = (settings.Values["VoiceGuideEnabled"] as bool?) ?? true;
             ElementSounds.IsOn = (settings.Values["SoundsOfElements"] as bool?) ?? true;
+
+            StorageFile licenseFile = await StorageFile.GetFileFromApplicationUriAsync(new("ms-appx:///Assets/License/agpl-3.0.rtf"));
+            try
+            {
+                IRandomAccessStream stream = await licenseFile.OpenAsync(FileAccessMode.Read);
+                SuperLicenseBox.Document.LoadFromStream(Microsoft.UI.Text.TextSetOptions.FormatRtf, stream);
+            }
+            catch
+            {
+                return;
+            }
         }
     }
 }

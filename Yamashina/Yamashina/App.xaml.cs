@@ -96,12 +96,12 @@ namespace Yamashina
                 ApplicationData.Current.LocalSettings.Values["SoundsOfElements"] = true;
             }
 
-            if (ApplicationData.Current.Version < 2)
+            if (ApplicationData.Current.Version < 3)
             {
                 // Settings dependent on version
 
                 await ApplicationData.Current.SetVersionAsync(
-                    2,
+                    3,
                     async handler =>
                     {
                         await ApplicationData.Current.LocalCacheFolder.CreateFileAsync(
