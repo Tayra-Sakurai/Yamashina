@@ -54,6 +54,7 @@ namespace Yamashina
             {
                 DefaultFileExtension = ".db",
                 SuggestedStartLocation = PickerLocationId.ComputerFolder,
+                SuggestedFileName = "Database.db",
             };
             ResourceLoader resourceLoader = new();
 
@@ -105,7 +106,7 @@ namespace Yamashina
             VoiceSettingSwitch.IsOn = (settings.Values["VoiceGuideEnabled"] as bool?) ?? true;
             ElementSounds.IsOn = (settings.Values["SoundsOfElements"] as bool?) ?? true;
 
-            StorageFile licenseFile = await StorageFile.GetFileFromApplicationUriAsync(new("ms-appx:///Assets/License/agpl-3.0.rtf"));
+            StorageFile licenseFile = await StorageFile.GetFileFromApplicationUriAsync(new("ms-appx:///Assets/LICENSES/LICENSE.rtf"));
             try
             {
                 IRandomAccessStream stream = await licenseFile.OpenAsync(FileAccessMode.Read);
